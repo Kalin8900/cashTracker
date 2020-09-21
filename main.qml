@@ -17,6 +17,26 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
+                width: parent.width
+                height: home.height * 1.25
+
+                Rectangle {
+                    color: "#3e4252"
+                    anchors.fill: parent
+
+                    Label {
+                        anchors.fill: parent
+                        text: qsTr("Cash Tracker")
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                        font.pixelSize: 20
+                        font.bold: true
+                    }
+                }
+            }
+
+            ItemDelegate {
+                id: home
                 text: qsTr("Home")
                 width: parent.width
                 onClicked: {
@@ -33,32 +53,32 @@ ApplicationWindow {
             }
 
             ItemDelegate {
-                text: qsTr("Page 1")
+                text: qsTr("Income")
                 width: parent.width
                 onClicked: {
-                    if(stackView.currentItem.title === "test") //BAD
+                    if(stackView.currentItem.title === "Income") //BAD
                         drawer.close()
                     else {
                         if(stackView.depth > 1)
                             stackView.pop()
 
-                        stackView.push("Page1Form.ui.qml")
+                        stackView.push("Income.ui.qml")
                         drawer.close()
                     }
                 }
             }
 
             ItemDelegate {
-                text: qsTr("Page 2")
+                text: qsTr("Outgoings")
                 width: parent.width
                 onClicked: {
-                    if(stackView.currentItem.title === "test2") //BAD
+                    if(stackView.currentItem.title === "Outgoings") //BAD
                         drawer.close()
                     else {
                         if(stackView.depth > 1)
                             stackView.pop()
 
-                        stackView.push("Page2Form.ui.qml")
+                        stackView.push("Outgoings.ui.qml")
                         drawer.close()
                     }
                 }

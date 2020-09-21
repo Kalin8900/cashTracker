@@ -6,7 +6,7 @@ Page {
     height: 800
     visible: true
 
-    title: qsTr("test")
+    title: qsTr("Income")
 
     PageBackground {
         visible: true
