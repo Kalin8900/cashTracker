@@ -16,9 +16,8 @@ Rectangle {
         height: 438
         color: "#803e4252"
         radius: 304.5
-        border.color: "#878fb8"
         border.width: 0
-        rotation: 0
+
 
         Label {
             id: label
