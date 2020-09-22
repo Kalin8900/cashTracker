@@ -62,7 +62,7 @@ ApplicationWindow {
                         if(stackView.depth > 1)
                             stackView.pop()
 
-                        stackView.push("Income.ui.qml")
+                        stackView.push("Income.qml")
                         drawer.close()
                     }
                 }

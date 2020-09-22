@@ -10,8 +10,6 @@ int main(int argc, char *argv[])
 
     logger::attach();
 
-    qInfo() << "TEST!";
-
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
