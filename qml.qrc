@@ -2,9 +2,9 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>HomeForm.ui.qml</file>
-        <file>Income.ui.qml</file>
         <file>Outgoings.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>PageBackground.qml</file>
+        <file>Income.qml</file>
     </qresource>
 </RCC>
