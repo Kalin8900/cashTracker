@@ -26,7 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
-set(SOURCE main.cpp appregister.cpp logger.cpp operation.h)
+set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp)
 set(HEADERS appregister.h logger.h operation.h)
 
 if(ANDROID)
