@@ -28,17 +28,21 @@ find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp)
 set(HEADERS appregister.h logger.h operation.h)
+set(TESTING tests/unittests.h tests/operationTests.h)
+
 
 if(ANDROID)
     add_library(cashTracker SHARED
       ${SOURCE}
       ${HEADERS}
+      ${TESTING}
       qml.qrc
     )
 else()
     add_executable(cashTracker
       ${SOURCE}
       ${HEADERS}
+      ${TESTING}
       qml.qrc
     )
 endif()
