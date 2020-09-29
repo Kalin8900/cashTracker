@@ -8,10 +8,6 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QDate d = QDate::currentDate();
-
-    qInfo() << d.toString();
-
     logger::attach();
 
     QQmlApplicationEngine engine;
