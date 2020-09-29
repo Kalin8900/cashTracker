@@ -26,8 +26,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
-set(SOURCE main.cpp appregister.cpp logger.cpp)
-set(HEADERS appregister.h logger.h)
+set(SOURCE main.cpp appregister.cpp logger.cpp operation.h)
+set(HEADERS appregister.h logger.h operation.h)
 
 if(ANDROID)
     add_library(cashTracker SHARED
