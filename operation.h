@@ -6,18 +6,22 @@
 #include <QDataStream>
 #include <QDebug>
 
-class Operation : public QObject
+class Operation
 {
-    Q_OBJECT
+
 public:
     Operation(const float& value, const QDateTime &date,
-              const QString &category, const qint64 &number, QObject *parent = nullptr);
+              const QString &category, const qint64 &number);
+
+    Operation() = default;
 
     float value() const;
 
     QDateTime date() const;
 
     QString category() const;
+
+    qint64 number() const;
 
     friend QDataStream& operator<<(QDataStream &ds, const Operation &op);
 
@@ -31,4 +35,6 @@ private:
     qint64 number_;
 };
 
+
+bool operator==(const Operation &lhs, const Operation &rhs);
 #endif // OPERATION_H
