@@ -13,6 +13,7 @@ ApplicationWindow {
         width: window.width * 0.33
         height: window.height
 
+
         Column {
             anchors.fill: parent
 
