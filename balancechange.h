@@ -1,8 +1,7 @@
 #ifndef BALANCECHANGE_H
 #define BALANCECHANGE_H
+#include <QVector>
 #include "operation.h"
-#include "operation.cpp"
-#include <qvector>
 
 class BalanceChange
 {

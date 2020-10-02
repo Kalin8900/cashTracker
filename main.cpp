@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     #ifdef TESTS
-    (operationTests) ?  qInfo() << "All tests went well" :
+    (operationTests()) ?  qInfo() << "All tests went well" :
                                    qInfo() << "Operations tests failure";
     #endif
 
