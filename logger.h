@@ -28,8 +28,6 @@ public:
     logger operator=(const logger &other) = delete;
     static bool isLogging();
 
-signals:
-
 private:
     explicit logger(QObject *parent = nullptr);
     logger &getLogger() const;

@@ -45,7 +45,6 @@ void logger::handler(QtMsgType type, const QMessageLogContext &context, const QS
     {
         QString toPrint;
         switch (type) {
-
         case QtInfoMsg:
             toPrint = QString("Info: %1 in %2").arg(msg).arg(context.file);
             break;
@@ -68,7 +67,7 @@ void logger::handler(QtMsgType type, const QMessageLogContext &context, const QS
         {
             QTextStream stream(&outFile);
             stream << QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss") << " - " << toPrint <<
-                  " line: " << context.line << "\n";
+                      " line: " << context.line << "\n";
             stream.flush();
             outFile.close();
         } else
