@@ -3,11 +3,11 @@
 
 #include <QObject>
 
-class appRegister : public QObject
+class AppRegister : public QObject
 {
     Q_OBJECT
 public:
-    explicit appRegister(QObject *parent = nullptr);
+    explicit AppRegister(QObject *parent = nullptr);
 
 signals:
 

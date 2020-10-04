@@ -1,6 +1,6 @@
 #include "appregister.h"
 
-appRegister::appRegister(QObject *parent) : QObject(parent)
+AppRegister::AppRegister(QObject *parent) : QObject(parent)
 {
 
 }

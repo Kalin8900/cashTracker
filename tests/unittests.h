@@ -45,11 +45,11 @@ QPair<bool, QString> savingTest(const QVector<T> &testsElements)
     }
 
     QDataStream ds(&file);
-    ds.setVersion(QDataStream::Qt_5_15);
+    ds.setVersion(QDataStream::Qt_5_14);
     for(const auto &elem : testsElements)
         ds << elem;
 
-    qInfo() << "Saving test went good. Given vector size is: " << sizeof(T) * testsElements.size()
+    qInfo() << "Saving test went good. Given vector size is: " << sizeof(T) * testsElements.size() + sizeof(testsElements)
             << "File size is: " << file.size() << "\n";
 
     file.close();
