@@ -6,10 +6,14 @@
 class BalanceChange
 {
     public:
+
         BalanceChange(QVector<Operation> ops);
-        virtual void addOperation(const Operation& operation) = 0;
+
+        void addOperation(const Operation& operation);
+
         Operation removeLast();
-    protected:
+
+    private:
         QVector<Operation> operations;
 };
 
