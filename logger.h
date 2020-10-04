@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QTextStream>
 
-class logger : public QObject
+class Logger : public QObject
 {
     Q_OBJECT
 public:

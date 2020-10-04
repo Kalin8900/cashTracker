@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
                                    qInfo() << "Operations tests failure";
     #endif
 
-    logger::attach();
+    Logger::attach();
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
