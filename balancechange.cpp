@@ -14,6 +14,11 @@ Operation BalanceChange::removeLast()
     return operations.takeLast();
 }
 
+QVector<Operation> BalanceChange::getOperations() const
+{
+    return operations;
+}
+
 QDataStream &operator<<(QDataStream &ds, const BalanceChange &bc)
 {
     ds << bc.operations;
@@ -24,4 +29,9 @@ QDataStream &operator>>(QDataStream &ds, BalanceChange &bc)
 {
     ds >> bc.operations;
     return ds;
+}
+
+bool operator==(const BalanceChange &lhs, const BalanceChange &rhs)
+{
+    return lhs.getOperations() == rhs.getOperations();
 }

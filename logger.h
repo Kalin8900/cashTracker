@@ -24,13 +24,13 @@ public:
     static QString getLogFile();
     static void setLogFile(const QString &value);
 
-    logger(const logger &other) = delete;
-    logger operator=(const logger &other) = delete;
+    Logger(const Logger &other) = delete;
+    Logger operator=(const Logger &other) = delete;
     static bool isLogging();
 
 private:
-    explicit logger(QObject *parent = nullptr);
-    logger &getLogger() const;
+    explicit Logger(QObject *parent = nullptr);
+    Logger &getLogger() const;
 
     static QString logFile;
     static bool logging;

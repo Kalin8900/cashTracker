@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
@@ -29,7 +29,7 @@ find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp balancechange.cpp)
 set(HEADERS appregister.h logger.h operation.h balancechange.h)
-set(TESTING tests/unittests.h tests/operationTests.h)
+set(TESTING tests/unittests.h tests/operationTests.h tests/balanceChangeTests.h)
 
 if(ANDROID)
     add_library(cashTracker SHARED

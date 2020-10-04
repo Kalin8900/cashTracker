@@ -1,47 +1,47 @@
 #include <stdexcept>
 #include "logger.h"
 
-QString logger::logFile(QDir::currentPath() +
+QString Logger::logFile(QDir::currentPath() +
                         QDir::separator() + "log.txt");
-bool logger::logging(false);
+bool Logger::logging(false);
 const static QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(nullptr);
 
 
-logger::logger(QObject *parent) : QObject(parent)
+Logger::Logger(QObject *parent) : QObject(parent)
 {
 
 }
 
-logger &logger::getLogger() const
+Logger &Logger::getLogger() const
 {
-    static logger log;
+    static Logger log;
     return log;
 }
 
-bool logger::isLogging()
+bool Logger::isLogging()
 {
     return logging;
 }
 
-QString logger::getLogFile()
+QString Logger::getLogFile()
 {
     return logFile;
 }
 
-void logger::setLogFile(const QString &value)
+void Logger::setLogFile(const QString &value)
 {
     logFile = value;
 }
 
-void logger::attach()
+void Logger::attach()
 {
-    logger::logging = true;
-    qInstallMessageHandler(logger::handler);
+    Logger::logging = true;
+    qInstallMessageHandler(Logger::handler);
 }
 
-void logger::handler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+void Logger::handler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    if(logger::logging)
+    if(Logger::logging)
     {
         QString toPrint;
         switch (type) {
@@ -62,7 +62,7 @@ void logger::handler(QtMsgType type, const QMessageLogContext &context, const QS
             break;
         }
 
-        QFile outFile(logger::logFile);
+        QFile outFile(Logger::logFile);
         if(outFile.open(QIODevice::WriteOnly | QIODevice::Append))
         {
             QTextStream stream(&outFile);
@@ -71,7 +71,7 @@ void logger::handler(QtMsgType type, const QMessageLogContext &context, const QS
             stream.flush();
             outFile.close();
         } else
-            throw std::runtime_error("Couldn't open log file " + logger::logFile.toStdString());
+            throw std::runtime_error("Couldn't open log file " + Logger::logFile.toStdString());
 
 
     }
@@ -79,9 +79,9 @@ void logger::handler(QtMsgType type, const QMessageLogContext &context, const QS
     (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, msg);
 }
 
-bool logger::toggleLogging()
+bool Logger::toggleLogging()
 {
-    logger::logging = !logger::logging;
+    Logger::logging = !Logger::logging;
 
-    return logger::logging;
+    return Logger::logging;
 }

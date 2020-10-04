@@ -7,6 +7,7 @@
 
 #ifdef TESTS
 #include "tests/operationTests.h"
+#include "tests/balanceChangeTests.h"
 #endif
 
 
@@ -18,8 +19,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     #ifdef TESTS
-    (operationTests()) ?  qInfo() << "All tests went well" :
+    (operationTests()) ?  qInfo() << "Operation tests went well" :
                                    qInfo() << "Operations tests failure";
+
+    (balanceChangeTests()) ?  qInfo() << "BalanceChange tests went well" :
+                                   qInfo() << "BalanceChange tests failure";
+
     #endif
 
     Logger::attach();
