@@ -8,8 +8,6 @@ class Balance : public QObject
 {
     Q_OBJECT
 public:
-    Balance(const float &balance, const BalanceChange &income,
-                     const BalanceChange &expense, QObject *parent = nullptr);
 
     void changeBalance(const Operation &op);
 
@@ -17,9 +15,25 @@ public:
 
     BalanceChange expense() const;
 
+    float getBalance() const;
+    void setBalance(float balance);
+
+
+    Balance(const Balance &other) = delete;
+    Balance operator==(const Balance &other) = delete;
+
+
 private:
+    explicit Balance(QObject *parent = nullptr);
+    static Balance &getBalanceInstance();
+
+    void loadLast(); //this will read the data if app is opend not the first time
+    void init(); //when app is opend for the first time
+
     BalanceChange income_, expense_;
     float balance_;
+
+
 };
 
 #endif // BALANCE_H

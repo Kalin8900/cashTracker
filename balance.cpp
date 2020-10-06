@@ -1,11 +1,11 @@
 #include "balance.h"
 
-Balance::Balance(const float &balance, const BalanceChange &income,
-                 const BalanceChange &expense, QObject *parent)
-    : QObject(parent),
-      income_(income),
-      expense_(expense),
-      balance_(balance) {}
+Balance::Balance(QObject *parent)
+    : QObject(parent)
+{
+    //because appregister is not ready there is init only
+    Balance::init();
+}
 
 void Balance::changeBalance(const Operation &op)
 {
@@ -22,4 +22,36 @@ BalanceChange Balance::income() const
 BalanceChange Balance::expense() const
 {
     return expense_;
+}
+
+void Balance::loadLast()
+{
+    //TODO: check if its opend more than once
+
+    //TODO: load data from files
+
+    //TODO: save to Balance
+}
+
+void Balance::init()
+{
+    //TODO: check if its opend for the first time
+
+    balance_ = 0;
+}
+
+float Balance::getBalance() const
+{
+    return balance_;
+}
+
+void Balance::setBalance(float balance)
+{
+    balance_ = balance;
+}
+
+Balance &Balance::getBalanceInstance()
+{
+    static Balance bal;
+    return bal;
 }
