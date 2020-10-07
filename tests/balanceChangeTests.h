@@ -30,7 +30,7 @@ bool addOperationTest(QVector<BalanceChange> testVec)
         elem.addOperation(op);
         auto afterAddBack = elem.getOperations().back();
 
-        ans &= (beforeAddBack != afterAddBack) && (afterAddBack == op); //change !(==) to (!=) when operator is ready.
+        ans &= (beforeAddBack != afterAddBack) && (afterAddBack == op);
     }
 
     return ans;
