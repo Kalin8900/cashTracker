@@ -26,4 +26,6 @@ private:
 
 bool operator==(const BalanceChange &lhs, const BalanceChange &rhs);
 
+bool operator!=(const BalanceChange &lhs, const BalanceChange &rhs);
+
 #endif // BALANCECHANGE_H

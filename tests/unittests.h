@@ -45,7 +45,7 @@ QPair<bool, QString> savingTest(const QVector<T> &testsElements)
     }
 
     QDataStream ds(&file);
-    ds.setVersion(QDataStream::Qt_5_14);
+    ds.setVersion(QDataStream::Qt_5_15);
     for(const auto &elem : testsElements)
         ds << elem;
 
