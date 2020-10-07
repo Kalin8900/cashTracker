@@ -17,20 +17,20 @@ public:
     static void attach();
     static void handler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
 
-    void turnLoggingOff() { logging = false; };
-    void turnLoggingOn() { logging = true; };
-    bool toggleLogging();
+    static void turnLoggingOff() { logging = false; };
+    static void turnLoggingOn() { logging = true; };
+    static bool toggleLogging();
 
     static QString getLogFile();
     static void setLogFile(const QString &value);
 
-    Logger(const Logger &other) = delete;
-    Logger operator=(const Logger &other) = delete;
     static bool isLogging();
 
+    Logger(const Logger &other) = delete;
+    Logger operator=(const Logger &other) = delete;
 private:
     explicit Logger(QObject *parent = nullptr);
-    Logger &getLogger() const;
+    static Logger &getLogger();
 
     static QString logFile;
     static bool logging;
