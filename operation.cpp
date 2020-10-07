@@ -48,6 +48,5 @@ bool operator==(const Operation &lhs, const Operation &rhs)
 
 bool operator!=(const Operation &lhs, const Operation &rhs)
 {
-    return lhs.date() != rhs.date() || lhs.value() != rhs.value()
-            || lhs.category() != rhs.category() || lhs.number() != rhs.number();
+    return !(lhs == rhs);
 }
