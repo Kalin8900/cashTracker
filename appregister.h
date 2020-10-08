@@ -5,7 +5,6 @@
 #include <QDir>
 #include <QFile>
 #include <QDataStream>
-#include <QTextStream>
 
 
 class AppRegister
@@ -13,13 +12,10 @@ class AppRegister
 public:
     AppRegister();
 
-    bool checkFirstTime();
-
-    bool getFirstTime() const;
+    bool isFirstTime() const;
     void setFirstTime(bool value);
 
     bool saveState();
-
 
 private:
     bool firstTime;

@@ -16,6 +16,7 @@
 
 int main(int argc, char *argv[])
 {
+    //to shorten the notation
     auto *bal = &Balance::getBalanceInstance();
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
     engine.load(url);
 
 
-    //Saving data
+    //Saving data TODO: catching exceptions
     a.saveState();
     bal->saveCurrentState();
 

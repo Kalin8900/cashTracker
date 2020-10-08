@@ -9,29 +9,27 @@ class Balance : public QObject
 {
     Q_OBJECT
 public:
+    static Balance &getBalanceInstance();
 
     void changeBalance(const Operation &op);
 
-    BalanceChange income() const;
+    BalanceChange getIncome() const;
 
-    BalanceChange expense() const;
+    BalanceChange getExpense() const;
 
     float getBalance() const;
     void setBalance(float balance);
 
-
-    Balance(const Balance &other) = delete;
-    Balance operator=(const Balance &other) = delete;
-
     void addAppRegister(AppRegister *app);
 
-    static Balance &getBalanceInstance();
-
-    void startBalance();
+    void startBalance(); //There should be other name of this method but Im out of ideas
 
     bool saveCurrentState();
 
     friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
+
+    Balance(const Balance &other) = delete;
+    Balance operator=(const Balance &other) = delete;
 
 private:
     explicit Balance(QObject *parent = nullptr);

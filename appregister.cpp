@@ -1,19 +1,15 @@
 #include "appregister.h"
-#include <QDebug>
 
 QString AppRegister::appPath_ = QDir::currentPath() + QDir::separator() + "appregisterinit.txt";
 
 AppRegister::AppRegister()
 {
-    AppRegister::init();
+    if(!AppRegister::init())
+        throw std::runtime_error("Coudln't initalise AppRegister");
 }
 
-bool AppRegister::checkFirstTime()
-{
-    return firstTime;
-}
 
-bool AppRegister::getFirstTime() const
+bool AppRegister::isFirstTime() const
 {
     return firstTime;
 }
@@ -66,7 +62,7 @@ bool AppRegister::init()
 
 QDataStream &operator<<(QDataStream &ds, const AppRegister &app)
 {
-    ds << app.getFirstTime();
+    ds << app.isFirstTime();
     return ds;
 }
 

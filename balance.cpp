@@ -5,10 +5,7 @@ QString Balance::balancePath_ = QDir::currentPath() + QDir::separator() + "balan
 
 Balance::Balance(QObject *parent)
     : QObject(parent)
-{
-    //because appregister is not ready there is init only
-    //Balance::init();
-}
+{}
 
 void Balance::changeBalance(const Operation &op)
 {
@@ -17,12 +14,12 @@ void Balance::changeBalance(const Operation &op)
     (op.value() > 0) ? income_.addOperation(op) : expense_.addOperation(op);
 }
 
-BalanceChange Balance::income() const
+BalanceChange Balance::getIncome() const
 {
     return income_;
 }
 
-BalanceChange Balance::expense() const
+BalanceChange Balance::getExpense() const
 {
     return expense_;
 }
@@ -78,7 +75,7 @@ Balance &Balance::getBalanceInstance()
 
 void Balance::startBalance()
 {
-    (appRegister_->getFirstTime()) ? init() : loadLast();
+    (appRegister_->isFirstTime()) ? init() : loadLast();
 }
 
 bool Balance::saveCurrentState()
@@ -107,6 +104,6 @@ QDataStream &operator>>(QDataStream &ds, Balance &bl)
 
 QDataStream &operator<<(QDataStream &ds, const Balance &bl)
 {
-    ds << bl.income() << bl.expense() << bl.getBalance();
+    ds << bl.getIncome() << bl.getExpense() << bl.getBalance();
     return ds;
 }
