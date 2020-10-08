@@ -1,29 +1,77 @@
 #include "appregister.h"
+#include <QDebug>
+
+QString AppRegister::appPath_ = QDir::currentPath() + QDir::separator() + "appregisterinit.txt";
 
 AppRegister::AppRegister()
 {
     AppRegister::init();
 }
 
-void AppRegister::init()
+bool AppRegister::checkFirstTime()
 {
-    //path
-    const QString path = QDir::currentPath() + QDir::separator() + "appregisterinit.txt";
+    return firstTime;
+}
 
-    //check if exists
+bool AppRegister::getFirstTime() const
+{
+    return firstTime;
+}
+
+void AppRegister::setFirstTime(bool value)
+{
+    firstTime = value;
+}
+
+void AppRegister::saveState()
+{
+    QFile file(AppRegister::appPath_);
+
+    setFirstTime(false);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        throw std::runtime_error("Coudln't open file to perform a AppRegister state save " + file.fileName().toStdString());
+        return false;
+    }
+
+    QDataStream ds(&file);
+    ds << *this;
+    file.close();
+}
 
 
-    QFile file(path);
+
+bool AppRegister::init()
+{
+    //TODO: check if file exists
+
+
+    QFile file(AppRegister::appPath_);
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        throw std::runtime_error("Coudln't open file to perform a AppRegister init " + file.fileName().toStdString());
+        return false;
+    }
     QDataStream ts(&file);
+    ts >> *this; //should load firstTime;
+
+    file.close();
+
+    return true;
+}
+
+
+QDataStream &operator<<(QDataStream &ds, AppRegister &app)
+{
+    ds << app.getFirstTime();
+    return ds;
+}
+
+QDataStream &operator>>(QDataStream &ds, AppRegister &app)
+{
     bool read;
-    ts >> read;
-
-    firstTime = read;
-    //file
-    //read from file
-    //firstTime
-    //save to class
-
-
-
+    ds >> read;
+    app.setFirstTime(read);
+    return ds;
 }

@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include "logger.h"
 #include "operation.h"
+#include "appregister.h"
+#include "balance.h"
 
 #define TESTS
 
@@ -26,6 +28,15 @@ int main(int argc, char *argv[])
                                    qInfo() << "BalanceChange tests failure";
 
     #endif
+
+    AppRegister a;
+
+    Balance::getBalanceInstance().addAppRegister(&a);
+
+    Balance::getBalanceInstance().startBalance();
+
+    a.saveState();
+
 
     Logger::attach();
 

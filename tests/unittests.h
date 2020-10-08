@@ -49,9 +49,6 @@ QPair<bool, QString> savingTest(const QVector<T> &testsElements)
     for(const auto &elem : testsElements)
         ds << elem;
 
-    qInfo() << "Saving test went good. Given vector size is: " << sizeof(T) * testsElements.size() + sizeof(testsElements)
-            << "File size is: " << file.size() << "\n";
-
     file.close();
     return qMakePair(true, file.fileName());
 }

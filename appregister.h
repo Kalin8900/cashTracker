@@ -13,10 +13,21 @@ class AppRegister
 public:
     AppRegister();
 
+    bool checkFirstTime();
+
+    bool getFirstTime() const;
+    void setFirstTime(bool value);
+
+    bool saveState();
+
+
 private:
     bool firstTime;
+    static QString appPath_;
 
-    void init();
+    bool init();
 };
 
+QDataStream &operator<<(QDataStream &ds, const AppRegister &app);
+QDataStream &operator>>(QDataStream &ds, AppRegister &app);
 #endif // APPREGISTER_H

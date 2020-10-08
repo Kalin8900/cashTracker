@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "balancechange.h"
+#include "appregister.h"
 
 class Balance : public QObject
 {
@@ -22,17 +23,25 @@ public:
     Balance(const Balance &other) = delete;
     Balance operator==(const Balance &other) = delete;
 
+    void addAppRegister(AppRegister *app);
+
+    static Balance &getBalanceInstance();
+
+    void startBalance();
+
+    bool saveCurrentState();
 
 private:
     explicit Balance(QObject *parent = nullptr);
-    static Balance &getBalanceInstance();
 
-    void loadLast(); //this will read the data if app is opend not the first time
+    bool loadLast(); //this will read the data if app is opend not the first time
     void init(); //when app is opend for the first time
 
     BalanceChange income_, expense_;
     float balance_;
+    AppRegister *appRegister_;
 
+    static QString balancePath_;
 
 };
 
