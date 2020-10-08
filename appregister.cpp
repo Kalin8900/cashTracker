@@ -23,7 +23,7 @@ void AppRegister::setFirstTime(bool value)
     firstTime = value;
 }
 
-void AppRegister::saveState()
+bool AppRegister::saveState()
 {
     QFile file(AppRegister::appPath_);
 
@@ -37,6 +37,8 @@ void AppRegister::saveState()
     QDataStream ds(&file);
     ds << *this;
     file.close();
+
+    return true;
 }
 
 
@@ -62,7 +64,7 @@ bool AppRegister::init()
 }
 
 
-QDataStream &operator<<(QDataStream &ds, AppRegister &app)
+QDataStream &operator<<(QDataStream &ds, const AppRegister &app)
 {
     ds << app.getFirstTime();
     return ds;

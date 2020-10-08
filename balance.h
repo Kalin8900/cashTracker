@@ -21,7 +21,7 @@ public:
 
 
     Balance(const Balance &other) = delete;
-    Balance operator==(const Balance &other) = delete;
+    Balance operator=(const Balance &other) = delete;
 
     void addAppRegister(AppRegister *app);
 
@@ -31,10 +31,12 @@ public:
 
     bool saveCurrentState();
 
+    friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
+
 private:
     explicit Balance(QObject *parent = nullptr);
 
-    bool loadLast(); //this will read the data if app is opend not the first time
+    void loadLast(); //this will read the data if app is opend not the first time
     void init(); //when app is opend for the first time
 
     BalanceChange income_, expense_;
@@ -44,5 +46,7 @@ private:
     static QString balancePath_;
 
 };
+
+QDataStream &operator<<(QDataStream &ds, const Balance &bl);
 
 #endif // BALANCE_H

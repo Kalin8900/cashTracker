@@ -32,15 +32,27 @@ void Balance::loadLast()
     qInfo() << "Loading from file";
 
     //TODO: check if file exist
-    //TODO: load data from files
-    //TODO: save to Balance
+
+    QFile file(Balance::balancePath_);
+
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        throw std::runtime_error("Coudln't open file to perform a Balance last state loading"
+                                 + file.fileName().toStdString());
+        return;
+    }
+
+    QDataStream ds(&file);
+
+    ds >> *this;
+
 }
 
 void Balance::init()
 {
     qInfo() << "Balance initialised";
 
-    balance_ = 0;
+    balance_ = 0; 
 }
 
 float Balance::getBalance() const
@@ -71,7 +83,7 @@ void Balance::startBalance()
 
 bool Balance::saveCurrentState()
 {
-    //TODO: file validation
+    //TODO: file validation and creating if needed
     QFile file(balancePath_);
 
     if(!file.open(QIODevice::WriteOnly))
@@ -80,7 +92,21 @@ bool Balance::saveCurrentState()
         return false;
     }
 
+    QDataStream ds(&file);
+    ds << *this;
 
     file.close();
     return true;
+}
+
+QDataStream &operator>>(QDataStream &ds, Balance &bl)
+{
+    ds >> bl.income_ >> bl.expense_ >> bl.balance_;
+    return ds;
+}
+
+QDataStream &operator<<(QDataStream &ds, const Balance &bl)
+{
+    ds << bl.income() << bl.expense() << bl.getBalance();
+    return ds;
 }

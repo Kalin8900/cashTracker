@@ -16,6 +16,8 @@
 
 int main(int argc, char *argv[])
 {
+    auto *bal = &Balance::getBalanceInstance();
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
@@ -31,12 +33,8 @@ int main(int argc, char *argv[])
 
     AppRegister a;
 
-    Balance::getBalanceInstance().addAppRegister(&a);
-
-    Balance::getBalanceInstance().startBalance();
-
-    a.saveState();
-
+    bal->addAppRegister(&a);
+    bal->startBalance();
 
     Logger::attach();
 
@@ -48,6 +46,11 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+
+    //Saving data
+    a.saveState();
+    bal->saveCurrentState();
 
     return app.exec();
 }
