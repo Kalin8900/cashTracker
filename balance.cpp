@@ -73,7 +73,7 @@ Balance &Balance::getBalanceInstance()
     return bal;
 }
 
-void Balance::startBalance()
+void Balance::initiateBalance ()
 {
     (appRegister_->isFirstTime()) ? init() : loadLast();
 }

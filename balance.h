@@ -22,7 +22,7 @@ public:
 
     void addAppRegister(AppRegister *app);
 
-    void startBalance(); //There should be other name of this method but Im out of ideas
+    void initiateBalance();
 
     bool saveCurrentState();
 

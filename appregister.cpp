@@ -5,7 +5,7 @@ QString AppRegister::appPath_ = QDir::currentPath() + QDir::separator() + "appre
 AppRegister::AppRegister()
 {
     if(!AppRegister::init())
-        throw std::runtime_error("Coudln't initalise AppRegister");
+        throw std::runtime_error("Couldn't initalise AppRegister");
 }
 
 
@@ -26,7 +26,7 @@ bool AppRegister::saveState()
     setFirstTime(false);
     if(!file.open(QIODevice::WriteOnly))
     {
-        throw std::runtime_error("Coudln't open file to perform a AppRegister state save " + file.fileName().toStdString());
+        throw std::runtime_error("Couldn't open file to perform a AppRegister state save " + file.fileName().toStdString());
         return false;
     }
 
@@ -48,7 +48,7 @@ bool AppRegister::init()
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        throw std::runtime_error("Coudln't open file to perform a AppRegister init " + file.fileName().toStdString());
+        throw std::runtime_error("Couldn't open file to perform a AppRegister init " + file.fileName().toStdString());
         return false;
     }
     QDataStream ts(&file);

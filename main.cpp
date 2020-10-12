@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     AppRegister a;
 
     bal->addAppRegister(&a);
-    bal->startBalance();
+    bal->initiateBalance ();
 
     Logger::attach();
 

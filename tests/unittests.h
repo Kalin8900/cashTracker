@@ -39,7 +39,7 @@ QPair<bool, QString> savingTest(const QVector<T> &testsElements)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        throw std::runtime_error("Coudln't open file to perform a saving test " + file.fileName().toStdString());
+        throw std::runtime_error("Couldn't open file to perform a saving test " + file.fileName().toStdString());
         file.close();
         return qMakePair(false, file.fileName());
     }
@@ -60,7 +60,7 @@ bool readingTest(const QString &path, const QVector<T> &toMatch)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        throw std::runtime_error("Coudln't open file to perform a reading test" + file.fileName().toStdString());
+        throw std::runtime_error("Couldn't open file to perform a reading test" + file.fileName().toStdString());
         return false;
     }
 
