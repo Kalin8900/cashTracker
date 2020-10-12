@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include "logger.h"
 #include "operation.h"
+#include "appregister.h"
+#include "balance.h"
 
 #define TESTS
 
@@ -14,6 +16,9 @@
 
 int main(int argc, char *argv[])
 {
+    //to shorten the notation
+    auto *bal = &Balance::getBalanceInstance();
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
@@ -27,6 +32,11 @@ int main(int argc, char *argv[])
 
     #endif
 
+    AppRegister a;
+
+    bal->addAppRegister(&a);
+    bal->initiateBalance ();
+
     Logger::attach();
 
     QQmlApplicationEngine engine;
@@ -37,6 +47,11 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+
+    //Saving data TODO: catching exceptions
+    a.saveState();
+    bal->saveCurrentState();
 
     return app.exec();
 }
