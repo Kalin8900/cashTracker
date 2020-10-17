@@ -39,18 +39,15 @@ QPair<bool, QString> savingTest(const QVector<T> &testsElements)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        throw std::runtime_error("Coudln't open file to perform a saving test " + file.fileName().toStdString());
+        throw std::runtime_error("Couldn't open file to perform a saving test " + file.fileName().toStdString());
         file.close();
         return qMakePair(false, file.fileName());
     }
 
     QDataStream ds(&file);
-    ds.setVersion(QDataStream::Qt_5_14);
+    ds.setVersion(QDataStream::Qt_5_15);
     for(const auto &elem : testsElements)
         ds << elem;
-
-    qInfo() << "Saving test went good. Given vector size is: " << sizeof(T) * testsElements.size() + sizeof(testsElements)
-            << "File size is: " << file.size() << "\n";
 
     file.close();
     return qMakePair(true, file.fileName());
@@ -63,7 +60,7 @@ bool readingTest(const QString &path, const QVector<T> &toMatch)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        throw std::runtime_error("Coudln't open file to perform a reading test" + file.fileName().toStdString());
+        throw std::runtime_error("Couldn't open file to perform a reading test" + file.fileName().toStdString());
         return false;
     }
 

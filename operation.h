@@ -37,4 +37,6 @@ private:
 
 
 bool operator==(const Operation &lhs, const Operation &rhs);
+
+bool operator!=(const Operation &lhs, const Operation &rhs);
 #endif // OPERATION_H

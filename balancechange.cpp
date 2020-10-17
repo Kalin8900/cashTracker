@@ -35,3 +35,8 @@ bool operator==(const BalanceChange &lhs, const BalanceChange &rhs)
 {
     return lhs.getOperations() == rhs.getOperations();
 }
+
+bool operator!=(const BalanceChange &lhs, const BalanceChange &rhs)
+{
+    return lhs.getOperations() != rhs.getOperations();
+}

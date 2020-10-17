@@ -12,7 +12,7 @@ Logger::Logger(QObject *parent) : QObject(parent)
 
 }
 
-Logger &Logger::getLogger() const
+Logger &Logger::getLogger()
 {
     static Logger log;
     return log;
