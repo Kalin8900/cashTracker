@@ -33,13 +33,17 @@ int main(int argc, char *argv[])
 
     #endif
 
-    AppRegister a;
+    auto appReg = QScopedPointer<AppRegister>(new AppRegister());
 
-    bal->addAppRegister(&a);
+    bal->addAppRegister(appReg.get());
     bal->initiateBalance();
     Logger::attach();
 
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty(QStringLiteral("balance"), bal);
+    engine.rootContext()->setContextProperty(QStringLiteral("appregister"), QVariant::fromValue(appReg.get()));
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -50,7 +54,7 @@ int main(int argc, char *argv[])
 
 
     //Saving data TODO: catching exceptions
-    a.saveState();
+    appReg->saveState();
     bal->saveCurrentState();
 
     return app.exec();
