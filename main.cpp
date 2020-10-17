@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
 
     bal->addAppRegister(&a);
     bal->initiateBalance();
-
     Logger::attach();
 
     QQmlApplicationEngine engine;
