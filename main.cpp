@@ -37,11 +37,12 @@ int main(int argc, char *argv[])
 
     bal->addAppRegister(appReg.get());
     bal->initiateBalance();
+
     Logger::attach();
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty(QStringLiteral("balance"), bal);
+    engine.rootContext()->setContextProperty("balance", bal);
     engine.rootContext()->setContextProperty(QStringLiteral("appregister"), QVariant::fromValue(appReg.get()));
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

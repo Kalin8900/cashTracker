@@ -8,6 +8,7 @@
 class Balance : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(float balance READ getBalance)
 public:
     static Balance &getBalanceInstance();
 

@@ -30,7 +30,7 @@ Page {
             y: 4
             width: 350
             height: 50
-            text: "100 zł"
+            text: balance.balance + qsTr(" zł")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.horizontalCenterOffset: 1
