@@ -6,7 +6,7 @@ Rectangle {
     width: 980
     height: 800
     clip: true
-    color: "#2e2e37"
+    color: "#22203c"
     anchors.fill: parent
 
     Rectangle {
@@ -14,7 +14,7 @@ Rectangle {
         y: 647
         width: 843
         height: 438
-        color: "#803e4252"
+        color: "#3a3b48"
         radius: 304.5
         border.width: 0
 
@@ -38,11 +38,48 @@ Rectangle {
         y: -377
         width: 505
         height: 308
-        color: "#3e4252"
+        color: "#3a3b48"
         radius: 50
         border.width: 0
         scale: 2
         rotation: 45
+    }
+
+    Label {
+        x: 7
+        y: 6
+        width: 89
+        height: 50
+        text: qsTr("18:46")
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        anchors.horizontalCenterOffset: -235
+        font.pointSize: 12
+        anchors.verticalCenterOffset: 342
+        anchors.centerIn: parent
+    }
+
+    Rectangle {
+        id: rectangle2
+        x: 203
+        y: 722
+        width: 1
+        height: 40
+        color: "#ffffff"
+    }
+
+    Label {
+        x: 3
+        y: 5
+        width: 135
+        height: 50
+        text: qsTr("15-10-2020")
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        anchors.horizontalCenterOffset: -360
+        font.pointSize: 12
+        anchors.verticalCenterOffset: 342
+        anchors.centerIn: parent
     }
 
 

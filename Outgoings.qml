@@ -7,9 +7,3 @@ Page {
     PageBackground {}
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.5;height:480;width:640}
-}
-##^##*/
-

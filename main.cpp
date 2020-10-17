@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QtQml>
 #include "logger.h"
 #include "operation.h"
 #include "appregister.h"
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
     AppRegister a;
 
     bal->addAppRegister(&a);
-    bal->initiateBalance ();
+    bal->initiateBalance();
 
     Logger::attach();
 
