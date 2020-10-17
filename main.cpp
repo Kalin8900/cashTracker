@@ -6,7 +6,7 @@
 #include "appregister.h"
 #include "balance.h"
 
-#define TESTS
+//#define TESTS
 
 #ifdef TESTS
 #include "tests/operationTests.h"
