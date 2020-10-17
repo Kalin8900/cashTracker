@@ -47,7 +47,7 @@ ApplicationWindow {
                         if(stackView.depth > 1)
                             stackView.pop()
 
-                        stackView.push("HomeForm.ui.qml")
+                        stackView.push("HomeForm.qml")
                         drawer.close()
                     }
                 }
@@ -79,7 +79,7 @@ ApplicationWindow {
                         if(stackView.depth > 1)
                             stackView.pop()
 
-                        stackView.push("Outgoings.ui.qml")
+                        stackView.push("Outgoings.qml")
                         drawer.close()
                     }
                 }
@@ -89,7 +89,7 @@ ApplicationWindow {
 
     StackView {
         id: stackView
-        initialItem: "HomeForm.ui.qml"
+        initialItem: "HomeForm.qml"
         anchors.fill: parent
     }
 
