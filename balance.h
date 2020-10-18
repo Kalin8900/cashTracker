@@ -34,8 +34,8 @@ public:
 private:
     explicit Balance(QObject *parent = nullptr);
 
-    void loadLast(); //this will read the data if app is opend not the first time
-    void init(); //when app is opend for the first time
+    void loadLast(); //this will read the data if app is opened not the first time
+    void init(); //when app is opened for the first time
 
     BalanceChange income_, expense_;
     float balance_;

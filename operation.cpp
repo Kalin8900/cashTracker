@@ -6,7 +6,11 @@ Operation::Operation(const float &value, const QDateTime &date,
     : value_(value),
       date_(date),
       category_(category),
-      number_(number) {}
+      number_(number)
+{
+    if(value_ == 0)
+        throw std::invalid_argument("Operation must have either positive or negative value.");
+}
 
 float Operation::value() const
 {
