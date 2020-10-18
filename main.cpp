@@ -37,13 +37,17 @@ int main(int argc, char *argv[])
 
     bal->addAppRegister(appReg.get());
     bal->initiateBalance();
-
+//    bal->setBalance(200.50);
+//    bal->changeBalance({-150.25f, QDateTime::currentDateTime(), "Sport", 1});
+    qInfo() << bal->getExpense().size();
+    auto lastOp = bal->getLastOperation();
+    qInfo() << lastOp.first.value();
     Logger::attach();
 
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("balance", bal);
-    engine.rootContext()->setContextProperty(QStringLiteral("appregister"), QVariant::fromValue(appReg.get()));
+    engine.rootContext()->setContextProperty("appregister", QVariant::fromValue(appReg.get()));
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

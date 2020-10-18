@@ -28,7 +28,7 @@ find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 
 set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp balancechange.cpp balance.cpp)
-set(HEADERS appregister.h logger.h operation.h balancechange.h balance.h)
+set(HEADERS appregister.h logger.h operation.h balancechange.h balance.h GLOBALS.h)
 set(TESTING tests/unittests.h tests/operationTests.h tests/balanceChangeTests.h)
 
 if(ANDROID)

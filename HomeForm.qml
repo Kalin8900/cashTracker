@@ -58,7 +58,10 @@ Page {
             y: 0
             width: 89
             height: 50
-            text: qsTr("50zł")
+            property string value: balance.getValueFromOperation(
+                                       balance.getLastOperationIdx(),
+                                       balance.getIsLastOperationPlace())
+            text: qsTr(value + " zł")
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenterOffset: -50
@@ -67,12 +70,14 @@ Page {
             anchors.centerIn: parent
         }
 
+
+
         Label {
             x: 3
             y: 2
             width: 89
             height: 50
-            text: qsTr("Wakacje")
+            text: qsTr("test")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.horizontalCenterOffset: 52

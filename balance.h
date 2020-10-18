@@ -27,12 +27,21 @@ public:
 
     bool saveCurrentState();
 
-    Operation getLastOperation();
+    QPair<Operation, QString> getLastOperation();
+
+    Q_INVOKABLE float getValueFromOperation(const qint32 &index, const QString &place);
+
+    Q_INVOKABLE qint32 getLastOperationIdx();
+
+    Q_INVOKABLE QString getIsLastOperationPlace();
+
+    QPair<qint32, QString> getLastOperationMeta();
 
     friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
 
     Balance(const Balance &other) = delete;
     Balance operator=(const Balance &other) = delete;
+
 
 private:
     explicit Balance(QObject *parent = nullptr);

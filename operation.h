@@ -9,6 +9,7 @@
 class Operation
 {
 
+
 public:
     Operation(const float& value, const QDateTime &date,
               const QString &category, const qint64 &number);
@@ -19,7 +20,9 @@ public:
 
     QDateTime date() const;
 
-    QString category() const;
+    Q_INVOKABLE QString category() const;
+
+    Q_INVOKABLE void test();
 
     qint64 number() const;
 
@@ -39,4 +42,6 @@ private:
 bool operator==(const Operation &lhs, const Operation &rhs);
 
 bool operator!=(const Operation &lhs, const Operation &rhs);
+
+Q_DECLARE_METATYPE(Operation)
 #endif // OPERATION_H
