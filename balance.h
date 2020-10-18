@@ -27,6 +27,8 @@ public:
 
     bool saveCurrentState();
 
+    Operation getLastOperation();
+
     friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
 
     Balance(const Balance &other) = delete;

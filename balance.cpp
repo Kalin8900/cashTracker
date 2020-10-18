@@ -98,9 +98,15 @@ bool Balance::saveCurrentState()
 
 Operation Balance::getLastOperation()
 {
-    auto *incomeLast = &income_.getOperations().back();
-    auto *expenseLast = &expense_.getOperations().back();
-    return (incomeLast->date() < expenseLast->date()) ? *incomeLast : *expenseLast;
+    if(income_.size() == expense_.size() == 0)
+        throw std::range_error("Balance does not have any operations");
+    if(income_.size() == 0 && expense_.size() != 0)
+        return expense_.lastOperation();
+    if(income_.size() != 0 && expense_.size() == 0)
+        return income_.lastOperation();
+
+    return (income_.lastOperation().date() < expense_.lastOperation().date()) ?
+                income_.lastOperation() : expense_.lastOperation();
 }
 
 QDataStream &operator>>(QDataStream &ds, Balance &bl)
