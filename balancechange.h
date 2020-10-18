@@ -20,8 +20,10 @@ class BalanceChange
 
         QVector<Operation> getOperations() const;
 
+        qint64 size() const;
+
 private:
-        QVector<Operation> operations;
+        QVector<Operation> operations_;
 };
 
 bool operator==(const BalanceChange &lhs, const BalanceChange &rhs);

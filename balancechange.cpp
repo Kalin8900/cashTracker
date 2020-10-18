@@ -1,33 +1,38 @@
 #include "balancechange.h"
 
 BalanceChange::BalanceChange(QVector<Operation> ops)
-    : operations(std::move(ops))
+    : operations_(std::move(ops))
 {}
 
 void BalanceChange::addOperation(const Operation &operation)
 {
-    operations.push_back(operation);
+    operations_.push_back(operation);
 }
 
 Operation BalanceChange::removeLast()
 {
-    return operations.takeLast();
+    return operations_.takeLast();
 }
 
 QVector<Operation> BalanceChange::getOperations() const
 {
-    return operations;
+    return operations_;
+}
+
+qint64 BalanceChange::size() const
+{
+    return operations_.size();
 }
 
 QDataStream &operator<<(QDataStream &ds, const BalanceChange &bc)
 {
-    ds << bc.operations;
+    ds << bc.operations_;
     return ds;
 }
 
 QDataStream &operator>>(QDataStream &ds, BalanceChange &bc)
 {
-    ds >> bc.operations;
+    ds >> bc.operations_;
     return ds;
 }
 
