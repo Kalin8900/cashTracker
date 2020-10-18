@@ -22,6 +22,8 @@ class BalanceChange
 
         qint64 size() const;
 
+        Operation lastOperation() const;
+
 private:
         QVector<Operation> operations_;
 };

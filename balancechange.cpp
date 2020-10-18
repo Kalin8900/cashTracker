@@ -24,6 +24,13 @@ qint64 BalanceChange::size() const
     return operations_.size();
 }
 
+Operation BalanceChange::lastOperation() const
+{
+    if(operations_.size() == 0)
+        throw std::range_error("Can't give last operation because operation vector size is 0");
+    return operations_.back();
+}
+
 QDataStream &operator<<(QDataStream &ds, const BalanceChange &bc)
 {
     ds << bc.operations_;
