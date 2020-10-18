@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     bal->addAppRegister(appReg.get());
     bal->initiateBalance();
 //    bal->setBalance(200.50);
-//    bal->changeBalance({-150.25f, QDateTime::currentDateTime(), "Sport", 1});
+//    bal->changeBalance({1532.32, QDateTime::currentDateTime(), "Wakacje", 1});
     qInfo() << bal->getExpense().size();
     auto lastOp = bal->getLastOperation();
     qInfo() << lastOp.first.value();

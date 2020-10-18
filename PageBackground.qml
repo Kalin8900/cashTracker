@@ -9,6 +9,15 @@ Rectangle {
     color: "#22203c"
     anchors.fill: parent
 
+    Timer {
+           interval: 500; running: true; repeat: true
+           onTriggered: {
+               var date = new Date();
+               dateLow.text = Qt.formatDateTime(date, "dd-MM-yyyy")
+               timeLow.text = Qt.formatTime(date, "hh:mm:ss")
+       }
+   }
+
     Rectangle {
         x: 386
         y: 647
@@ -46,11 +55,11 @@ Rectangle {
     }
 
     Label {
+        id: timeLow
         x: 7
         y: 6
         width: 89
         height: 50
-        text: qsTr("18:46")
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.horizontalCenterOffset: -235
@@ -69,11 +78,11 @@ Rectangle {
     }
 
     Label {
+        id: dateLow
         x: 3
         y: 5
         width: 135
         height: 50
-        text: qsTr("15-10-2020")
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         anchors.horizontalCenterOffset: -360

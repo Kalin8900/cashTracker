@@ -106,7 +106,7 @@ QPair<Operation, QString> Balance::getLastOperation()
     if(income_.size() != 0 && expense_.size() == 0)
         return qMakePair(income_.lastOperation(), GLOBAL::INCOME);
 
-    return (income_.lastOperation().date() < expense_.lastOperation().date()) ?
+    return (income_.lastOperation().date() > expense_.lastOperation().date()) ?
                 qMakePair(income_.lastOperation(), GLOBAL::INCOME) : qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
 }
 
@@ -121,13 +121,34 @@ float Balance::getValueFromOperation(const qint32 &index, const QString &place)
         throw std::invalid_argument("Given argument " + place.toStdString() + " does not match any place. Check GLOBALS");
 }
 
+QString Balance::getCategoryFromOperation(const qint32 &index, const QString &place)
+{
+    if(place == GLOBAL::INCOME)
+        return income_.getOperations().at(index).category();
+    else if(place == GLOBAL::EXPENSE)
+        return expense_.getOperations().at(index).category();
+    else
+        throw std::invalid_argument("Given argument " + place.toStdString() + " does not match any place. Check GLOBALS");
+}
+
+QString Balance::getDateFromOperation(const qint32 &index, const QString &place)
+{
+    if(place == GLOBAL::INCOME)
+        return income_.getOperations().at(index).date().date().toString("dd-MM-yyyy");
+    else if(place == GLOBAL::EXPENSE)
+        return expense_.getOperations().at(index).date().date().toString("dd-MM-yyyy");
+    else
+        throw std::invalid_argument("Given argument " + place.toStdString() + " does not match any place. Check GLOBALS");
+
+}
+
 qint32 Balance::getLastOperationIdx()
 {
     qInfo() << getLastOperationMeta().first;
     return getLastOperationMeta().first;
 }
 
-QString Balance::getIsLastOperationPlace()
+QString Balance::getLastOperationPlace()
 {
     return getLastOperationMeta().second;
 }

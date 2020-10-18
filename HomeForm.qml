@@ -30,7 +30,8 @@ Page {
             y: 4
             width: 350
             height: 50
-            text: balance.balance + qsTr(" zł")
+            property string bal: Math.round((balance.balance) * 100) / 100
+            text: bal + qsTr(" zł")
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.horizontalCenterOffset: 1
@@ -58,9 +59,9 @@ Page {
             y: 0
             width: 89
             height: 50
-            property string value: balance.getValueFromOperation(
+            property string value: Math.round(balance.getValueFromOperation(
                                        balance.getLastOperationIdx(),
-                                       balance.getIsLastOperationPlace())
+                                       balance.getLastOperationPlace()) * 100) / 100;
             text: qsTr(value + " zł")
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
@@ -77,7 +78,10 @@ Page {
             y: 2
             width: 89
             height: 50
-            text: qsTr("test")
+            property string cat: balance.getCategoryFromOperation(
+                                     balance.getLastOperationIdx(),
+                                     balance.getLastOperationPlace())
+            text: cat
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             anchors.horizontalCenterOffset: 52
@@ -109,7 +113,10 @@ Page {
             y: 1
             width: 135
             height: 50
-            text: qsTr("15-10-2020")
+            property string date: balance.getDateFromOperation(
+                                      balance.getLastOperationIdx(),
+                                      balance.getLastOperationPlace())
+            text: date
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenterOffset: 177
