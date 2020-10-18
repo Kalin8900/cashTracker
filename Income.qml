@@ -6,7 +6,7 @@ Page {
     width: 980
     height: 800
     visible: true
-
+    id: root
     title: qsTr("Income")
 
     PageBackground {
@@ -214,11 +214,8 @@ Page {
             height: 32
             text: qsTr("Add Item")
 
-            onClicked: model.append({
-                                        "cost": Number(incomeCost.text),
-                                        "date": incomeDate.text,
-                                        "category": incomeCategory.text
-                                    })
+            onClicked: {
+            }
         }
 
         Button {

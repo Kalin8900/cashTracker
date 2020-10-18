@@ -96,6 +96,13 @@ bool Balance::saveCurrentState()
     return true;
 }
 
+Operation Balance::getLastOperation()
+{
+    auto *incomeLast = &income_.getOperations().back();
+    auto *expenseLast = &expense_.getOperations().back();
+    return (incomeLast->date() < expenseLast->date()) ? *incomeLast : *expenseLast;
+}
+
 QDataStream &operator>>(QDataStream &ds, Balance &bl)
 {
     ds >> bl.income_ >> bl.expense_ >> bl.balance_;
