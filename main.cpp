@@ -6,7 +6,7 @@
 #include "appregister.h"
 #include "balance.h"
 
-#define TESTS
+//#define TESTS
 
 #ifdef TESTS
 #include "tests/operationTests.h"
@@ -33,13 +33,20 @@ int main(int argc, char *argv[])
 
     #endif
 
-    AppRegister a;
+    auto appReg = QScopedPointer<AppRegister>(new AppRegister());
 
-    bal->addAppRegister(&a);
+    bal->addAppRegister(appReg.get());
     bal->initiateBalance();
+//    bal->setBalance(200.50);
+//    bal->changeBalance({1532.32, QDateTime::currentDateTime(), "Wakacje", 1});
+
     Logger::attach();
 
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty("balance", bal);
+    engine.rootContext()->setContextProperty("appregister", QVariant::fromValue(appReg.get()));
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -50,7 +57,7 @@ int main(int argc, char *argv[])
 
 
     //Saving data TODO: catching exceptions
-    a.saveState();
+    appReg->saveState();
     bal->saveCurrentState();
 
     return app.exec();

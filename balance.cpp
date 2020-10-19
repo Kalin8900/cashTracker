@@ -1,5 +1,6 @@
 #include "balance.h"
 #include "appregister.h"
+#include "GLOBALS.h"
 
 QString Balance::balancePath_ = QDir::currentPath() + QDir::separator() + "balance.txt";
 
@@ -26,7 +27,7 @@ BalanceChange Balance::getExpense() const
 
 void Balance::loadLast()
 {
-    qInfo() << "Loading from file";
+    qInfo() << "Loading Balance from file";
 
     //TODO: check if file exist
 
@@ -42,7 +43,6 @@ void Balance::loadLast()
     QDataStream ds(&file);
 
     ds >> *this;
-
 }
 
 void Balance::init()
@@ -94,6 +94,66 @@ bool Balance::saveCurrentState()
 
     file.close();
     return true;
+}
+
+QPair<Operation, QString> Balance::getLastOperation()
+{
+    if(income_.size() == 0 && expense_.size() == 0)
+        throw std::range_error("Balance does not have any operations");
+    if(income_.size() == 0 && expense_.size() != 0)
+        return qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
+    if(income_.size() != 0 && expense_.size() == 0)
+        return qMakePair(income_.lastOperation(), GLOBAL::INCOME);
+
+    return (income_.lastOperation().date() > expense_.lastOperation().date()) ?
+                qMakePair(income_.lastOperation(), GLOBAL::INCOME) : qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
+}
+
+float Balance::getValueFromOperation(const qint32 &index, const QString &place)
+{
+    if(place == GLOBAL::INCOME)
+        return income_.getOperations().at(index).value();
+    else if(place == GLOBAL::EXPENSE)
+        return expense_.getOperations().at(index).value();
+    else
+        throw std::invalid_argument("Given argument " + place.toStdString() + " does not match any place. Check GLOBALS");
+}
+
+QString Balance::getCategoryFromOperation(const qint32 &index, const QString &place)
+{
+    if(place == GLOBAL::INCOME)
+        return income_.getOperations().at(index).category();
+    else if(place == GLOBAL::EXPENSE)
+        return expense_.getOperations().at(index).category();
+    else
+        throw std::invalid_argument("Given argument " + place.toStdString() + " does not match any place. Check GLOBALS");
+}
+
+QString Balance::getDateFromOperation(const qint32 &index, const QString &place)
+{
+    if(place == GLOBAL::INCOME)
+        return income_.getOperations().at(index).date().date().toString("dd-MM-yyyy");
+    else if(place == GLOBAL::EXPENSE)
+        return expense_.getOperations().at(index).date().date().toString("dd-MM-yyyy");
+    else
+        throw std::invalid_argument("Given argument " + place.toStdString() + " does not match any place. Check GLOBALS");
+
+}
+
+qint32 Balance::getLastOperationIdx()
+{
+    return getLastOperationMeta().first;
+}
+
+QString Balance::getLastOperationPlace()
+{
+    return getLastOperationMeta().second;
+}
+
+QPair<qint32, QString> Balance::getLastOperationMeta()
+{
+    return (getLastOperation().second == GLOBAL::INCOME) ? qMakePair(income_.size() - 1, GLOBAL::INCOME)
+                                                         : qMakePair(expense_.size() - 1, GLOBAL::EXPENSE);
 }
 
 QDataStream &operator>>(QDataStream &ds, Balance &bl)

@@ -8,6 +8,7 @@
 class Balance : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(float balance READ getBalance)
 public:
     static Balance &getBalanceInstance();
 
@@ -26,10 +27,25 @@ public:
 
     bool saveCurrentState();
 
+    QPair<Operation, QString> getLastOperation();
+
+    Q_INVOKABLE float getValueFromOperation(const qint32 &index, const QString &place);
+
+    Q_INVOKABLE QString getCategoryFromOperation(const qint32 &index, const QString &place);
+
+    Q_INVOKABLE QString getDateFromOperation(const qint32 &index, const QString &place);
+
+    Q_INVOKABLE qint32 getLastOperationIdx();
+
+    Q_INVOKABLE QString getLastOperationPlace();
+
+    QPair<qint32, QString> getLastOperationMeta();
+
     friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
 
     Balance(const Balance &other) = delete;
     Balance operator=(const Balance &other) = delete;
+
 
 private:
     explicit Balance(QObject *parent = nullptr);
