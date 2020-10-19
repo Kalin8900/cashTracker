@@ -39,9 +39,7 @@ int main(int argc, char *argv[])
     bal->initiateBalance();
 //    bal->setBalance(200.50);
 //    bal->changeBalance({1532.32, QDateTime::currentDateTime(), "Wakacje", 1});
-    qInfo() << bal->getExpense().size();
-    auto lastOp = bal->getLastOperation();
-    qInfo() << lastOp.first.value();
+
     Logger::attach();
 
     QQmlApplicationEngine engine;

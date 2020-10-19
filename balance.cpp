@@ -98,7 +98,6 @@ bool Balance::saveCurrentState()
 
 QPair<Operation, QString> Balance::getLastOperation()
 {
-    qInfo() << "income size" << income_.size() << " expense size: " << expense_.size();
     if(income_.size() == 0 && expense_.size() == 0)
         throw std::range_error("Balance does not have any operations");
     if(income_.size() == 0 && expense_.size() != 0)
@@ -112,7 +111,6 @@ QPair<Operation, QString> Balance::getLastOperation()
 
 float Balance::getValueFromOperation(const qint32 &index, const QString &place)
 {
-    qInfo() << "getValueFromOperation place is: " << place;
     if(place == GLOBAL::INCOME)
         return income_.getOperations().at(index).value();
     else if(place == GLOBAL::EXPENSE)
@@ -144,7 +142,6 @@ QString Balance::getDateFromOperation(const qint32 &index, const QString &place)
 
 qint32 Balance::getLastOperationIdx()
 {
-    qInfo() << getLastOperationMeta().first;
     return getLastOperationMeta().first;
 }
 
@@ -155,8 +152,6 @@ QString Balance::getLastOperationPlace()
 
 QPair<qint32, QString> Balance::getLastOperationMeta()
 {
-
-    qInfo() << getLastOperation().second;
     return (getLastOperation().second == GLOBAL::INCOME) ? qMakePair(income_.size() - 1, GLOBAL::INCOME)
                                                          : qMakePair(expense_.size() - 1, GLOBAL::EXPENSE);
 }
