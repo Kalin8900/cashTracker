@@ -31,6 +31,7 @@ Operation BalanceChange::lastOperation() const
     return operations_.back();
 }
 
+
 QDataStream &operator<<(QDataStream &ds, const BalanceChange &bc)
 {
     ds << bc.operations_;

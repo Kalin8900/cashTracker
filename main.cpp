@@ -1,6 +1,5 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QtQml>
+#include <QApplication>
+#include "mainwindow.h"
 #include "logger.h"
 #include "operation.h"
 #include "appregister.h"
@@ -17,21 +16,21 @@
 
 int main(int argc, char *argv[])
 {
-    //to shorten the notation
-    auto *bal = &Balance::getBalanceInstance();
-
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-    QGuiApplication app(argc, argv);
 
     #ifdef TESTS
-    (operationTests()) ?  qInfo() << "Operation tests went well" :
-                                   qInfo() << "Operations tests failure";
+        (operationTests()) ?  qInfo() << "Operation tests went well" :
+                                     qInfo() << "Operations tests failure";
 
-    (balanceChangeTests()) ?  qInfo() << "BalanceChange tests went well" :
-                                   qInfo() << "BalanceChange tests failure";
+        (balanceChangeTests()) ?  qInfo() << "BalanceChange tests went well" :
+                                         qInfo() << "BalanceChange tests failure";
 
     #endif
+
+    QApplication a(argc, argv);
+
+
+    //to shorten the notation
+    auto *bal = &Balance::getBalanceInstance();
 
     auto appReg = QScopedPointer<AppRegister>(new AppRegister());
 
@@ -42,23 +41,14 @@ int main(int argc, char *argv[])
 
     Logger::attach();
 
-    QQmlApplicationEngine engine;
-
-    engine.rootContext()->setContextProperty("balance", bal);
-    engine.rootContext()->setContextProperty("appregister", QVariant::fromValue(appReg.get()));
-
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
-
 
     //Saving data TODO: catching exceptions
     appReg->saveState();
     bal->saveCurrentState();
 
-    return app.exec();
+
+    MainWindow w;
+    w.show();
+
+    return a.exec();
 }

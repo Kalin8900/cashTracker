@@ -150,6 +150,11 @@ QString Balance::getLastOperationPlace()
     return getLastOperationMeta().second;
 }
 
+int Balance::getIncomeSize()
+{
+    return income_.size();
+}
+
 QPair<qint32, QString> Balance::getLastOperationMeta()
 {
     return (getLastOperation().second == GLOBAL::INCOME) ? qMakePair(income_.size() - 1, GLOBAL::INCOME)
