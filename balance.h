@@ -39,6 +39,8 @@ public:
 
     Q_INVOKABLE QString getLastOperationPlace();
 
+    Q_INVOKABLE int getIncomeSize();
+
     QPair<qint32, QString> getLastOperationMeta();
 
     friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
