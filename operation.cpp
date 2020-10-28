@@ -55,3 +55,10 @@ bool operator!=(const Operation &lhs, const Operation &rhs)
 {
     return !(lhs == rhs);
 }
+
+void operator<<(const Operation &lhs, const std::array<QLabel *, 3> &arr)
+{
+    GLOBAL::setTextInCenter(arr.at(0), QString::number(lhs.value()));
+    GLOBAL::setTextInCenter(arr.at(1), lhs.date().date().toString("dd-MM-yyyy"));
+    GLOBAL::setTextInCenter(arr.at(2), lhs.category());
+}

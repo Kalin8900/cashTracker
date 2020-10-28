@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QDataStream>
 #include <QDebug>
+#include <QLabel>
+#include "GLOBALS.h"
 
 class Operation
 {
@@ -42,6 +44,8 @@ private:
 bool operator==(const Operation &lhs, const Operation &rhs);
 
 bool operator!=(const Operation &lhs, const Operation &rhs);
+
+void operator<<(const Operation &lhs, const std::array<QLabel *, 3> &arr);
 
 Q_DECLARE_METATYPE(Operation)
 #endif // OPERATION_H
