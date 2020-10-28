@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QLabel>
 #include <array>
+#include "balance.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,8 +18,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(Balance *balance, QWidget *parent = nullptr);
     ~MainWindow();
+
 
 private slots:
     void on_pushButton_clicked();
@@ -31,9 +33,11 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    Balance *balance_;
 
-    std::array<QLabel *, 3> lastOperationLabels; //amount, date, category
+    std::array<QLabel *, 3> lastOperationLabels_; //amount, date, category
 
     QTimer *timer_;
+
 };
 #endif // MAINWINDOW_H

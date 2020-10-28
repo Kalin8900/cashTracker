@@ -4,16 +4,14 @@
 #include <QMessageBox>
 #include <QtQuickWidgets/QQuickWidget>
 #include <QDebug>
+#include "GLOBALS.h"
 
-void setTextInCenter(QLabel *l, const QString &msg)
-{
-    l->setText(msg);
-    l->setAlignment(Qt::AlignCenter);
-}
+using GLOBAL::setTextInCenter;
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(Balance *balance, QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
+      balance_(balance),
       timer_(new QTimer(this))
 {
     ui->setupUi(this);
@@ -23,9 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
     setTextInCenter(ui->date, QDate::currentDate().toString("dd-MM-yyyy"));
     setTextInCenter(ui->pageName, "Home");
 
-    lastOperationLabels.at(0) = ui->lastAmount;
-    lastOperationLabels.at(1) = ui->lastDate;
-    lastOperationLabels.at(2) = ui->lastCategory;
+    lastOperationLabels_.at(0) = ui->lastAmount;
+    lastOperationLabels_.at(1) = ui->lastDate;
+    lastOperationLabels_.at(2) = ui->lastCategory;
+
+    balance->getLastOperation().first << lastOperationLabels_;
+
+    setTextInCenter(ui->balance, QString::number(balance_->getBalance()) + " " + GLOBAL::CURRENCY);
 }
 
 MainWindow::~MainWindow()

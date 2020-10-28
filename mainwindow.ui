@@ -356,11 +356,12 @@ border-radius: 20%;</string>
        <property name="font">
         <font>
          <family>Roboto</family>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: #dadce1;
-background-color: red</string>
+</string>
        </property>
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -391,11 +392,11 @@ background-color: red</string>
        <property name="font">
         <font>
          <family>Roboto</family>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: #dadce1;
-background-color:red
 </string>
        </property>
        <property name="text">
@@ -414,11 +415,12 @@ background-color:red
        <property name="font">
         <font>
          <family>Roboto</family>
+         <pointsize>10</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: #dadce1;
-background-color: red</string>
+</string>
        </property>
        <property name="text">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

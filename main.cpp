@@ -41,14 +41,14 @@ int main(int argc, char *argv[])
 
     Logger::attach();
 
+    MainWindow w(bal);
+    w.show();
 
     //Saving data TODO: catching exceptions
     appReg->saveState();
     bal->saveCurrentState();
 
 
-    MainWindow w;
-    w.show();
 
     return a.exec();
 }

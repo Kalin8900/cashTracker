@@ -27,11 +27,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 
-set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp balancechange.cpp balance.cpp mainwindow.cpp )
+set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp balancechange.cpp balance.cpp mainwindow.cpp GLOBALS.cpp )
 set(HEADERS appregister.h logger.h operation.h balancechange.h balance.h mainwindow.h GLOBALS.h)
 set(TESTING tests/unittests.h tests/operationTests.h tests/balanceChangeTests.h)
 set(UI mainwindow.ui)
-set(QML test.qml)
 
 if(ANDROID)
     add_library(cashTracker SHARED
@@ -39,7 +38,6 @@ if(ANDROID)
       ${HEADERS}
       ${TESTING}
       ${UI}
-      ${QML}
     )
 else()
     add_executable(cashTracker
@@ -47,7 +45,6 @@ else()
       ${HEADERS}
       ${TESTING}
       ${UI}
-      ${QML}
     )
 endif()
 
