@@ -7,11 +7,8 @@
 namespace GLOBAL{
 const QString INCOME = "INCOME";
 const QString EXPENSE = "EXPENSE";
-void setTextInCenter(QLabel *l, const QString &msg)
-{
-    l->setText(msg);
-    l->setAlignment(Qt::AlignCenter);
-}
-}
+const QString CURRENCY = "PLN";
 
+void setTextInCenter(QLabel *l, const QString &msg);
+}
 #endif // GLOBALS_H

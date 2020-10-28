@@ -6,7 +6,8 @@
 #include <QDataStream>
 #include <QDebug>
 #include <QLabel>
-#include "GLOBALS.h"
+
+
 
 class Operation
 {

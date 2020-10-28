@@ -1,5 +1,5 @@
 #include "operation.h"
-
+#include "GLOBALS.h"
 
 Operation::Operation(const float &value, const QDateTime &date,
                      const QString &category, const qint64 &number)
@@ -58,7 +58,8 @@ bool operator!=(const Operation &lhs, const Operation &rhs)
 
 void operator<<(const Operation &lhs, const std::array<QLabel *, 3> &arr)
 {
-    GLOBAL::setTextInCenter(arr.at(0), QString::number(lhs.value()));
-    GLOBAL::setTextInCenter(arr.at(1), lhs.date().date().toString("dd-MM-yyyy"));
-    GLOBAL::setTextInCenter(arr.at(2), lhs.category());
+    using GLOBAL::setTextInCenter;
+    setTextInCenter(arr.at(0), QString::number(lhs.value()) + " " + GLOBAL::CURRENCY);
+    setTextInCenter(arr.at(1), lhs.date().date().toString("dd-MM-yyyy"));
+    setTextInCenter(arr.at(2), lhs.category());
 }
