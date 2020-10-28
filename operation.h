@@ -23,9 +23,7 @@ public:
 
     QDateTime date() const;
 
-    Q_INVOKABLE QString category() const;
-
-    Q_INVOKABLE void test();
+    QString category() const;
 
     qint64 number() const;
 

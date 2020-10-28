@@ -8,7 +8,6 @@
 class Balance : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(float balance READ getBalance)
 public:
     static Balance &getBalanceInstance();
 
@@ -29,17 +28,17 @@ public:
 
     QPair<Operation, QString> getLastOperation();
 
-    Q_INVOKABLE float getValueFromOperation(const qint32 &index, const QString &place);
+    float getValueFromOperation(const qint32 &index, const QString &place);
 
-    Q_INVOKABLE QString getCategoryFromOperation(const qint32 &index, const QString &place);
+    QString getCategoryFromOperation(const qint32 &index, const QString &place);
 
-    Q_INVOKABLE QString getDateFromOperation(const qint32 &index, const QString &place);
+    QString getDateFromOperation(const qint32 &index, const QString &place);
 
-    Q_INVOKABLE qint32 getLastOperationIdx();
+    qint32 getLastOperationIdx();
 
-    Q_INVOKABLE QString getLastOperationPlace();
+    QString getLastOperationPlace();
 
-    Q_INVOKABLE int getIncomeSize();
+    int getIncomeSize();
 
     QPair<qint32, QString> getLastOperationMeta();
 

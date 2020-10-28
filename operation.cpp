@@ -23,11 +23,6 @@ QString Operation::category() const
     return category_;
 }
 
-void Operation::test()
-{
-    qInfo() << "hello from qml";
-}
-
 qint64 Operation::number() const
 {
     return number_;

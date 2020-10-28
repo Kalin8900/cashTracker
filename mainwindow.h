@@ -23,11 +23,11 @@ public:
 
 
 private slots:
-    void on_pushButton_clicked();
+    void on_homeBtn_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_incomeBtn_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_expenseBtn_clicked();
 
     void updateTimer();
 
@@ -35,9 +35,13 @@ private:
     Ui::MainWindow *ui;
     Balance *balance_;
 
+    enum MenuButtons{HomeButton, IncomeButton, ExpenseButton};
+
     std::array<QLabel *, 3> lastOperationLabels_; //amount, date, category
 
     QTimer *timer_;
+
+    void handleMenuBtnClick(MenuButtons btnType);
 
 };
 #endif // MAINWINDOW_H

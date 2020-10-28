@@ -77,7 +77,7 @@ border-radius: 100%</string>
     <property name="styleSheet">
      <string notr="true">background-color: #343439;</string>
     </property>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="homeBtn">
      <property name="geometry">
       <rect>
        <x>-30</x>
@@ -121,7 +121,7 @@ border-radius: 20%
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="incomeBtn">
      <property name="geometry">
       <rect>
        <x>-30</x>
@@ -165,7 +165,7 @@ border-radius: 20%
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="expenseBtn">
      <property name="geometry">
       <rect>
        <x>-30</x>
@@ -264,6 +264,8 @@ color: #dadce1;
        <font>
         <family>Roboto</family>
         <pointsize>24</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
        </font>
       </property>
       <property name="styleSheet">
@@ -439,6 +441,94 @@ border-radius: 20%;</string>
         <string notr="true">background-color: #dadce1</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="hAddOperationBtn">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>300</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto Black</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Dodaj</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>add.png</normaloff>add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hRemoveOperationBtn">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>360</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto Black</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Usuń ostatnią</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>minus.png</normaloff>minus.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="incomePage">
