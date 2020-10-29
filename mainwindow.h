@@ -31,17 +31,20 @@ private slots:
 
     void updateTimer();
 
+    void on_closeBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     Balance *balance_;
 
-    enum MenuButtons{HomeButton, IncomeButton, ExpenseButton};
+    enum Pages{HomePage, IncomePage, ExpensePage};
 
+    Pages curPage_;
     std::array<QLabel *, 3> lastOperationLabels_; //amount, date, category
 
     QTimer *timer_;
 
-    void handleMenuBtnClick(MenuButtons btnType);
+    void handleMenuBtnClick(Pages page);
 
 };
 #endif // MAINWINDOW_H

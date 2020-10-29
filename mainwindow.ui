@@ -240,6 +240,50 @@ color: #dadce1;
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;CashTracker&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="closeBtn">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>660</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto Black</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>Close</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>x-mark.png</normaloff>x-mark.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+    </widget>
    </widget>
    <widget class="QStackedWidget" name="pages">
     <property name="geometry">

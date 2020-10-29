@@ -12,6 +12,7 @@ MainWindow::MainWindow(Balance *balance, QWidget *parent)
     : QMainWindow(parent),
       ui(new Ui::MainWindow),
       balance_(balance),
+      curPage_(MainWindow::HomePage),
       timer_(new QTimer(this))
 {
     ui->setupUi(this);
@@ -39,18 +40,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_homeBtn_clicked()
 {
-    handleMenuBtnClick(MainWindow::HomeButton);
+    handleMenuBtnClick(MainWindow::HomePage);
 }
 
 void MainWindow::on_incomeBtn_clicked()
 {
-    handleMenuBtnClick(MainWindow::IncomeButton);
+    handleMenuBtnClick(MainWindow::IncomePage);
 }
 
 void MainWindow::on_expenseBtn_clicked()
 {
-
-    handleMenuBtnClick(MainWindow::ExpenseButton);
+    handleMenuBtnClick(MainWindow::ExpensePage);
 }
 
 void MainWindow::updateTimer()
@@ -58,22 +58,35 @@ void MainWindow::updateTimer()
     setTextInCenter(ui->time, QTime::currentTime().toString("hh:mm"));
 }
 
-void MainWindow::handleMenuBtnClick(MainWindow::MenuButtons btnType)
+void MainWindow::handleMenuBtnClick(MainWindow::Pages page)
 {
-    switch (btnType)
+
+    if(page == curPage_)
+        return;
+
+    switch (page)
     {
-    case MainWindow::HomeButton:
+    case MainWindow::HomePage:
         ui->pages->setCurrentIndex(0);
         setTextInCenter(ui->pageName, HOMEPAGE);
         break;
-    case MainWindow::IncomeButton:
+    case MainWindow::IncomePage:
         ui->pages->setCurrentIndex(1);
         setTextInCenter(ui->pageName, INCOMEPAGE);
         break;
-    case MainWindow::ExpenseButton:
+    case MainWindow::ExpensePage:
         ui->pages->setCurrentIndex(2);
         setTextInCenter(ui->pageName, EXPENSEPAGE);
         break;
-
     }
+
+    curPage_ = page;
+}
+
+void MainWindow::on_closeBtn_clicked()
+{
+    auto closed = close();
+
+    if(!closed)
+        throw std::runtime_error("Couldn't close application");
 }
