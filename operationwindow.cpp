@@ -3,10 +3,11 @@
 
 
 #include <QDebug>
-OperationWindow::OperationWindow(Operation *operation, QWidget *parent) :
+OperationWindow::OperationWindow(Operation *operation, bool *added, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::OperationWindow),
-    operation_(operation)
+    operation_(operation),
+    added_(added)
 {
     ui->setupUi(this);
     ui->dateInput->setDateTime(QDateTime::currentDateTime());
@@ -23,11 +24,15 @@ OperationWindow::~OperationWindow()
 void OperationWindow::accept()
 {
     if(getValuesFromInputs())
+    {
+        *added_ = true;
         hide();
+    }
 }
 
 void OperationWindow::reject()
 {
+    *added_ = false;
     hide();
 }
 

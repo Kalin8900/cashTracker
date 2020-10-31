@@ -30,7 +30,7 @@ MainWindow::MainWindow(Balance *balance, QWidget *parent)
     showNewestOperation();
     showNewestBalance();
 
-    connect(balance_, &Balance::lastOperationChanged, this, &MainWindow::updateLastOperation);
+    connect(balance_, &Balance::lastOperationChanged, this, &MainWindow::updateNewestOperation);
     connect(balance_, &Balance::lastOperationChanged, this, &MainWindow::updateCurrentBalance);
 
     setWindowTitle("CashTracker");
@@ -44,7 +44,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateLastOperation()
+void MainWindow::updateNewestOperation()
 {
     showNewestOperation();
 }
@@ -135,16 +135,21 @@ void MainWindow::on_closeBtn_clicked()
 void MainWindow::on_hAddOperationBtn_clicked()
 {
     Operation op;
+    bool added;
 
     op.setNumber(balance_->totalSize());
-    OperationWindow ow(&op, this);
+    OperationWindow ow(&op, &added, this);
     ow.exec();
 
-    balance_->changeBalance(op);
+    if(added)
+        balance_->changeBalance(op);
 }
 
 void MainWindow::on_hRemoveOperationBtn_clicked()
 {
+    if(balance_->totalSize() <= 0)
+        return;
+
     bool remove;
     RemoveOperationWindow rw(&remove, this);
 

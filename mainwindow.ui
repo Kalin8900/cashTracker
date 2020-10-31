@@ -271,8 +271,8 @@ border-radius: 20%
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #dadce1;
-color: #242526;
+      <string notr="true">background-color: rgb(40, 42, 125);
+color: #dadce1;
 border: 0;
 
 
@@ -285,12 +285,56 @@ border: 0;
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/cashTracker.png</normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/cashTracker.png</iconset>
+       <normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/cashTrackerWhite.png</normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/cashTrackerWhite.png</iconset>
      </property>
      <property name="iconSize">
       <size>
        <width>80</width>
        <height>35</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="customizeBtn">
+     <property name="geometry">
+      <rect>
+       <x>-30</x>
+       <y>230</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto Black</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+     </property>
+     <property name="text">
+      <string>Customize</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/expense.png</normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/expense.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
       </size>
      </property>
     </widget>

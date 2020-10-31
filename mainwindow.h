@@ -22,7 +22,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void updateLastOperation();
+    void updateNewestOperation();
     void updateCurrentBalance();
 
 private slots:

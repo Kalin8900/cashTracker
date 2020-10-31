@@ -15,7 +15,7 @@ class OperationWindow : public QDialog
     Q_OBJECT
 
 public:
-    OperationWindow(Operation *operation,QWidget *parent = nullptr);
+    OperationWindow(Operation *operation, bool *added, QWidget *parent = nullptr);
     ~OperationWindow();
 
 public slots:
@@ -30,6 +30,7 @@ private slots:
 private:
     Ui::OperationWindow *ui;
     Operation *operation_;
+    bool *added_;
 
     bool getValuesFromInputs();
 

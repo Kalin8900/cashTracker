@@ -155,16 +155,47 @@ QPair<Operation, QString> Balance::getNewestOperation()
 
     if(totalSize() == 0)
         throw std::range_error("Balance does not have any operations");
-    if(income_.size() == 0 && expense_.size() != 0)
-        return qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
+//    if(income_.size() == 0 && expense_.size() != 0)
+//        return qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
+//    if(income_.size() != 0 && expense_.size() == 0)
+//        return qMakePair(income_.lastOperation(), GLOBAL::INCOME);
+
+
+
+
+    const Operation *newestOperation;
+    bool income;
+
     if(income_.size() != 0 && expense_.size() == 0)
-        return qMakePair(income_.lastOperation(), GLOBAL::INCOME);
+    {
+        newestOperation = &income_.getOperations().at(0);
+        income = true;
 
-    auto incomeLast = income_.lastOperation();
-    auto expenseLast = expense_.lastOperation();
+        for(int i = 1; i < income_.size(); ++i)
+            if(newestOperation->date() < income_.getOperations().at(i).date())
+            {
+                newestOperation = &income_.getOperations().at(i);
+                income = true;
+            }
+    }
 
-    return (incomeLast.date() > expenseLast.date()) ?
-                qMakePair(incomeLast, GLOBAL::INCOME) : qMakePair(expenseLast, GLOBAL::EXPENSE);
+    if(income_.size() == 0 && expense_.size() != 0)
+    {
+        newestOperation = &expense_.getOperations().at(0);
+        income = false;
+
+        for(int i = 0; i < expense_.size(); ++i)
+        {
+            if(newestOperation->date() < expense_.getOperations().at(i).date())
+            {
+                newestOperation = &expense_.getOperations().at(i);
+                income = false;
+            }
+        }
+    }
+
+    return (income) ? qMakePair(*newestOperation, GLOBAL::INCOME)
+                    : qMakePair(*newestOperation, GLOBAL::EXPENSE);
 }
 
 QPair<Operation, QString> Balance::getLastlyAddedOperation()
