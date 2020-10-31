@@ -12,7 +12,28 @@ void Balance::changeBalance(const Operation &op)
 {
     balance_ += op.value();
 
-    (op.value() > 0) ? income_.addOperation(op) : expense_.addOperation(op);
+    auto toInsert = op;
+    toInsert.setNumber(totalSize());
+
+    (op.value() > 0) ? income_.addOperation(toInsert) : expense_.addOperation(toInsert);
+
+
+    emit lastOperationChanged();
+}
+
+void Balance::changeBalance(const float &value, const QDateTime &date, const QString &category)
+{
+    if(value == 0)
+        throw std::invalid_argument("Value of the operation cannot be equal to 0");
+
+    balance_ += value;
+
+    if(value > 0)
+        income_.addOperation({value, date, category, totalSize()});
+    else
+        expense_.addOperation({value, date, category, totalSize()});
+
+    emit lastOperationChanged();
 }
 
 BalanceChange Balance::getIncome() const
@@ -49,7 +70,12 @@ void Balance::init()
 {
     qInfo() << "Balance initialised";
 
-    balance_ = 0; 
+    balance_ = 0.00;
+}
+
+AppRegister *Balance::getAppRegister() const
+{
+    return appRegister_;
 }
 
 float Balance::getBalance() const
@@ -96,17 +122,68 @@ bool Balance::saveCurrentState()
     return true;
 }
 
-QPair<Operation, QString> Balance::getLastOperation()
+void Balance::removeLastlyAddedOp()
 {
-    if(income_.size() == 0 && expense_.size() == 0)
+
+    float val;
+    bool onlyOne(false);
+    if(totalSize() == 0)
+        throw std::range_error("Balance does not have any operations");
+    if(income_.size() == 0 && expense_.size() != 0)
+    {
+        val = expense_.removeLast().value();
+        onlyOne = true;
+    }
+    if(income_.size() != 0 && expense_.size() == 0)
+    {
+        val = income_.removeLast().value();
+        onlyOne = true;
+    }
+
+
+    if(!onlyOne)
+        (income_.lastOperation().number() > expense_.lastOperation().number())
+            ? val = income_.removeLast().value() : val = expense_.removeLast().value();
+
+    balance_ -= val;
+
+    emit lastOperationChanged();
+}
+
+QPair<Operation, QString> Balance::getNewestOperation()
+{
+
+    if(totalSize() == 0)
         throw std::range_error("Balance does not have any operations");
     if(income_.size() == 0 && expense_.size() != 0)
         return qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
     if(income_.size() != 0 && expense_.size() == 0)
         return qMakePair(income_.lastOperation(), GLOBAL::INCOME);
 
-    return (income_.lastOperation().date() > expense_.lastOperation().date()) ?
-                qMakePair(income_.lastOperation(), GLOBAL::INCOME) : qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
+    auto incomeLast = income_.lastOperation();
+    auto expenseLast = expense_.lastOperation();
+
+    return (incomeLast.date() > expenseLast.date()) ?
+                qMakePair(incomeLast, GLOBAL::INCOME) : qMakePair(expenseLast, GLOBAL::EXPENSE);
+}
+
+QPair<Operation, QString> Balance::getLastlyAddedOperation()
+{
+
+    if(totalSize() == 0)
+        throw std::range_error("Balance does not have any operations");
+    if(income_.size() == 0 && expense_.size() != 0)
+        return qMakePair(expense_.lastOperation(), GLOBAL::EXPENSE);
+    if(income_.size() != 0 && expense_.size() == 0)
+        return qMakePair(income_.lastOperation(), GLOBAL::INCOME);
+
+
+    auto incomeLast = income_.lastOperation();
+    auto expenseLast = expense_.lastOperation();
+
+    return (incomeLast.number() > expenseLast.number()) ?
+                qMakePair(incomeLast, GLOBAL::INCOME) : qMakePair(expenseLast, GLOBAL::EXPENSE);
+
 }
 
 float Balance::getValueFromOperation(const qint32 &index, const QString &place)
@@ -140,25 +217,19 @@ QString Balance::getDateFromOperation(const qint32 &index, const QString &place)
 
 }
 
-qint32 Balance::getLastOperationIdx()
-{
-    return getLastOperationMeta().first;
-}
-
-QString Balance::getLastOperationPlace()
-{
-    return getLastOperationMeta().second;
-}
-
 int Balance::getIncomeSize()
 {
     return income_.size();
 }
 
-QPair<qint32, QString> Balance::getLastOperationMeta()
+int Balance::getExpenseSize()
 {
-    return (getLastOperation().second == GLOBAL::INCOME) ? qMakePair(income_.size() - 1, GLOBAL::INCOME)
-                                                         : qMakePair(expense_.size() - 1, GLOBAL::EXPENSE);
+    return expense_.size();
+}
+
+int Balance::totalSize()
+{
+    return getIncomeSize() + getExpenseSize();
 }
 
 QDataStream &operator>>(QDataStream &ds, Balance &bl)

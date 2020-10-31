@@ -1,10 +1,11 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include <QMessageBox>
-#include <QtQuickWidgets/QQuickWidget>
+#include <cmath>
 #include <QDebug>
 #include "GLOBALS.h"
+#include "operationwindow.h"
+#include "removeoperationwindow.h"
 
 using GLOBAL::setTextInCenter, GLOBAL::HOMEPAGE, GLOBAL::INCOMEPAGE, GLOBAL::EXPENSEPAGE;
 
@@ -26,16 +27,31 @@ MainWindow::MainWindow(Balance *balance, QWidget *parent)
     lastOperationLabels_.at(1) = ui->lastDate;
     lastOperationLabels_.at(2) = ui->lastCategory;
 
-    balance->getLastOperation().first << lastOperationLabels_;
+    showNewestOperation();
+    showNewestBalance();
 
-    setTextInCenter(ui->balance, QString::number(balance_->getBalance()) + " " + GLOBAL::CURRENCY);
+    connect(balance_, &Balance::lastOperationChanged, this, &MainWindow::updateLastOperation);
+    connect(balance_, &Balance::lastOperationChanged, this, &MainWindow::updateCurrentBalance);
 
-
+    setWindowTitle("CashTracker");
+    setWindowIcon(QIcon("cashTracker.png"));
 }
 
 MainWindow::~MainWindow()
 {
+    balance_->getAppRegister()->saveState();
+    balance_->saveCurrentState();
     delete ui;
+}
+
+void MainWindow::updateLastOperation()
+{
+    showNewestOperation();
+}
+
+void MainWindow::updateCurrentBalance()
+{
+    showNewestBalance();
 }
 
 void MainWindow::on_homeBtn_clicked()
@@ -57,6 +73,12 @@ void MainWindow::updateTimer()
 {
     setTextInCenter(ui->time, QTime::currentTime().toString("hh:mm"));
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    handleMenuBtnClick(MainWindow::HomePage);
+}
+
 
 void MainWindow::handleMenuBtnClick(MainWindow::Pages page)
 {
@@ -83,10 +105,51 @@ void MainWindow::handleMenuBtnClick(MainWindow::Pages page)
     curPage_ = page;
 }
 
+void MainWindow::showNewestBalance()
+{
+    setTextInCenter(ui->balance, QString::number(std::roundf(balance_->getBalance() * 100) / 100) + " " + GLOBAL::CURRENCY);
+}
+
+void MainWindow::showNewestOperation()
+{
+    if(balance_->totalSize() <= 0)
+        setNewestBlank();
+    else
+        balance_->getNewestOperation().first << lastOperationLabels_;
+}
+
+void MainWindow::setNewestBlank()
+{
+    for(const auto &label : lastOperationLabels_)
+        label->clear();
+}
+
 void MainWindow::on_closeBtn_clicked()
 {
     auto closed = close();
 
     if(!closed)
         throw std::runtime_error("Couldn't close application");
+}
+
+void MainWindow::on_hAddOperationBtn_clicked()
+{
+    Operation op;
+
+    op.setNumber(balance_->totalSize());
+    OperationWindow ow(&op, this);
+    ow.exec();
+
+    balance_->changeBalance(op);
+}
+
+void MainWindow::on_hRemoveOperationBtn_clicked()
+{
+    bool remove;
+    RemoveOperationWindow rw(&remove, this);
+
+    rw.exec();
+
+    if(remove)
+        balance_->removeLastlyAddedOp();
 }

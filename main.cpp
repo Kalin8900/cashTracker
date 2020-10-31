@@ -36,8 +36,21 @@ int main(int argc, char *argv[])
 
     bal->addAppRegister(appReg.get());
     bal->initiateBalance();
+
+    for(const auto &op : bal->getIncome().getOperations())
+    {
+        qInfo() << op.number();
+    }
+
+
+    for(const auto &op : bal->getExpense().getOperations())
+    {
+        qInfo() << op.number();
+    }
+
+
 //    bal->setBalance(200.50);
-//    bal->changeBalance({1532.32, QDateTime::currentDateTime(), "Wakacje", 1});
+//    bal->changeBalance({1532.32, QDateTime::currentDateTime(), "Rtv", bal->totalSize()});
 
     Logger::attach();
 
@@ -45,8 +58,7 @@ int main(int argc, char *argv[])
     w.show();
 
     //Saving data TODO: catching exceptions
-    appReg->saveState();
-    bal->saveCurrentState();
+    //saving should be in window destructr
 
 
 

@@ -32,6 +32,14 @@ public:
     friend QDataStream& operator>>(QDataStream &ds, Operation &op);
 
 
+    void setValue(float value);
+
+    void setDate(const QDateTime &date);
+
+    void setCategory(const QString &category);
+
+    void setNumber(const qint64 &number);
+
 private:
     float value_;
     QDateTime date_;

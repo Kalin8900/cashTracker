@@ -28,6 +28,26 @@ qint64 Operation::number() const
     return number_;
 }
 
+void Operation::setValue(float value)
+{
+    value_ = value;
+}
+
+void Operation::setDate(const QDateTime &date)
+{
+    date_ = date;
+}
+
+void Operation::setCategory(const QString &category)
+{
+    category_ = category;
+}
+
+void Operation::setNumber(const qint64 &number)
+{
+    number_ = number;
+}
+
 QDataStream &operator<<(QDataStream &ds, const Operation &op)
 {
     ds << op.value_ << op.date_ << op.category_ << op.number_;

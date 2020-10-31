@@ -21,6 +21,9 @@ public:
     MainWindow(Balance *balance, QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void updateLastOperation();
+    void updateCurrentBalance();
 
 private slots:
     void on_homeBtn_clicked();
@@ -32,6 +35,13 @@ private slots:
     void updateTimer();
 
     void on_closeBtn_clicked();
+
+    void on_hAddOperationBtn_clicked();
+
+    void on_hRemoveOperationBtn_clicked();
+
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -45,6 +55,9 @@ private:
     QTimer *timer_;
 
     void handleMenuBtnClick(Pages page);
+    void showNewestBalance();
+    void showNewestOperation();
+    void setNewestBlank();
 
 };
 #endif // MAINWINDOW_H
