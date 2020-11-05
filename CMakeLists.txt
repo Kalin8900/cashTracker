@@ -24,30 +24,31 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #    endif()
 #endif()
 
-find_package(Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 
-set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp balancechange.cpp balance.cpp)
-set(HEADERS appregister.h logger.h operation.h balancechange.h balance.h)
+set(SOURCE main.cpp appregister.cpp logger.cpp operation.cpp balancechange.cpp
+    balance.cpp mainwindow.cpp GLOBALS.cpp operationwindow.cpp removeoperationwindow.cpp)
+set(HEADERS appregister.h logger.h operation.h balancechange.h balance.h
+    mainwindow.h GLOBALS.h operationwindow.h removeoperationwindow.h)
 set(TESTING tests/unittests.h tests/operationTests.h tests/balanceChangeTests.h)
+set(UI mainwindow.ui operationwindow.ui removeoperationwindow.ui)
 
 if(ANDROID)
     add_library(cashTracker SHARED
       ${SOURCE}
       ${HEADERS}
       ${TESTING}
-      qml.qrc
+      ${UI}
     )
 else()
     add_executable(cashTracker
       ${SOURCE}
       ${HEADERS}
       ${TESTING}
-      qml.qrc
+      ${UI}
     )
 endif()
 
-target_compile_definitions(cashTracker
-  PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(cashTracker
-  PRIVATE Qt5::Core Qt5::Quick)
+    PRIVATE Qt5::Widgets)

@@ -17,6 +17,8 @@ public:
 
     bool saveState();
 
+    AppRegister(const AppRegister &other) = delete;
+    AppRegister operator=(const AppRegister &other) = delete;
 private:
     bool firstTime;
     static QString appPath_;
@@ -26,4 +28,6 @@ private:
 
 QDataStream &operator<<(QDataStream &ds, const AppRegister &app);
 QDataStream &operator>>(QDataStream &ds, AppRegister &app);
+
+Q_DECLARE_METATYPE(AppRegister*)
 #endif // APPREGISTER_H

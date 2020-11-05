@@ -6,22 +6,27 @@
 
 class BalanceChange
 {
-    public:
 
-        BalanceChange(QVector<Operation> ops = {});
+public:
 
-        void addOperation(const Operation& operation);
+    BalanceChange(QVector<Operation> ops = {});
 
-        Operation removeLast();
+    void addOperation(const Operation& operation);
 
-        friend QDataStream& operator<<(QDataStream &ds, const BalanceChange &bc);
+    Operation removeLast();
 
-        friend QDataStream& operator>>(QDataStream &ds, BalanceChange &bc);
+    friend QDataStream& operator<<(QDataStream &ds, const BalanceChange &bc);
 
-        QVector<Operation> getOperations() const;
+    friend QDataStream& operator>>(QDataStream &ds, BalanceChange &bc);
+
+    QVector<Operation> getOperations() const;
+
+    qint64 size() const;
+
+    Operation lastOperation() const;
 
 private:
-        QVector<Operation> operations;
+    QVector<Operation> operations_;
 };
 
 bool operator==(const BalanceChange &lhs, const BalanceChange &rhs);

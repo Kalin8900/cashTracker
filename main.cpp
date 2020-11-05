@@ -1,12 +1,11 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QtQml>
+#include <QApplication>
+#include "mainwindow.h"
 #include "logger.h"
 #include "operation.h"
 #include "appregister.h"
 #include "balance.h"
 
-#define TESTS
+//#define TESTS
 
 #ifdef TESTS
 #include "tests/operationTests.h"
@@ -17,41 +16,51 @@
 
 int main(int argc, char *argv[])
 {
-    //to shorten the notation
-    auto *bal = &Balance::getBalanceInstance();
-
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-    QGuiApplication app(argc, argv);
 
     #ifdef TESTS
-    (operationTests()) ?  qInfo() << "Operation tests went well" :
-                                   qInfo() << "Operations tests failure";
+        (operationTests()) ?  qInfo() << "Operation tests went well" :
+                                     qInfo() << "Operations tests failure";
 
-    (balanceChangeTests()) ?  qInfo() << "BalanceChange tests went well" :
-                                   qInfo() << "BalanceChange tests failure";
+        (balanceChangeTests()) ?  qInfo() << "BalanceChange tests went well" :
+                                         qInfo() << "BalanceChange tests failure";
 
     #endif
 
-    AppRegister a;
+    QApplication a(argc, argv);
 
-    bal->addAppRegister(&a);
+
+    //to shorten the notation
+    auto *bal = &Balance::getBalanceInstance();
+
+    auto appReg = QScopedPointer<AppRegister>(new AppRegister());
+
+    bal->addAppRegister(appReg.get());
     bal->initiateBalance();
+
+    for(const auto &op : bal->getIncome().getOperations())
+    {
+        qInfo() << op.number();
+    }
+
+
+    for(const auto &op : bal->getExpense().getOperations())
+    {
+        qInfo() << op.number();
+    }
+
+
+//    bal->setBalance(200.50);
+//    bal->changeBalance({1532.32, QDateTime::currentDateTime(), "Rtv", bal->totalSize()});
+
     Logger::attach();
 
-    QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/main.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
-    }, Qt::QueuedConnection);
-    engine.load(url);
-
+    MainWindow w(bal);
+    w.show();
 
     //Saving data TODO: catching exceptions
-    a.saveState();
-    bal->saveCurrentState();
+    //saving should be in window destructr
 
-    return app.exec();
+
+
+    return a.exec();
 }

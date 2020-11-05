@@ -1,5 +1,5 @@
 #include "operation.h"
-
+#include "GLOBALS.h"
 
 Operation::Operation(const float &value, const QDateTime &date,
                      const QString &category, const qint64 &number)
@@ -32,6 +32,26 @@ qint64 Operation::number() const
     return number_;
 }
 
+void Operation::setValue(float value)
+{
+    value_ = value;
+}
+
+void Operation::setDate(const QDateTime &date)
+{
+    date_ = date;
+}
+
+void Operation::setCategory(const QString &category)
+{
+    category_ = category;
+}
+
+void Operation::setNumber(const qint64 &number)
+{
+    number_ = number;
+}
+
 QDataStream &operator<<(QDataStream &ds, const Operation &op)
 {
     ds << op.value_ << op.date_ << op.category_ << op.number_;
@@ -53,4 +73,12 @@ bool operator==(const Operation &lhs, const Operation &rhs)
 bool operator!=(const Operation &lhs, const Operation &rhs)
 {
     return !(lhs == rhs);
+}
+
+void operator<<(const Operation &lhs, const std::array<QLabel *, 3> &arr)
+{
+    using GLOBAL::setTextInCenter;
+    setTextInCenter(arr.at(0), QString::number(lhs.value()) + " " + GLOBAL::CURRENCY);
+    setTextInCenter(arr.at(1), lhs.date().date().toString("dd-MM-yyyy"));
+    setTextInCenter(arr.at(2), lhs.category());
 }

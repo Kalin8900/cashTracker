@@ -1,4 +1,5 @@
 #include "appregister.h"
+#include <QDebug>
 
 QString AppRegister::appPath_ = QDir::currentPath() + QDir::separator() + "appregisterinit.txt";
 
@@ -32,6 +33,7 @@ bool AppRegister::saveState()
 
     QDataStream ds(&file);
     ds << *this;
+
     file.close();
 
     return true;
@@ -59,7 +61,7 @@ bool AppRegister::init()
     }
     QDataStream ts(&file);
     ts >> *this; //should load firstTime;
-
+    (firstTime) ? qInfo() <<  "AppRegister is loaded for first time" : qInfo() <<  "Its another opening";
     file.close();
 
     return true;
