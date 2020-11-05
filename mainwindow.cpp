@@ -34,7 +34,7 @@ MainWindow::MainWindow(Balance *balance, QWidget *parent)
     connect(balance_, &Balance::lastOperationChanged, this, &MainWindow::updateCurrentBalance);
 
     setWindowTitle("CashTracker");
-    setWindowIcon(QIcon("cashTracker.png"));
+    setWindowIcon(QIcon("cashTrackerWnd.png"));
 }
 
 MainWindow::~MainWindow()
