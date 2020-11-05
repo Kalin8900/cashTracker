@@ -8,11 +8,11 @@
 class Balance : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(float balance READ getBalance)
 public:
     static Balance &getBalanceInstance();
 
     void changeBalance(const Operation &op);
+    void changeBalance(const float &value, const QDateTime &date, const QString &category);
 
     BalanceChange getIncome() const;
 
@@ -27,26 +27,33 @@ public:
 
     bool saveCurrentState();
 
-    QPair<Operation, QString> getLastOperation();
+    void removeLastlyAddedOp();
 
-    Q_INVOKABLE float getValueFromOperation(const qint32 &index, const QString &place);
+    QPair<Operation, QString> getNewestOperation(); //newest in term of time
 
-    Q_INVOKABLE QString getCategoryFromOperation(const qint32 &index, const QString &place);
+    QPair<Operation, QString> getLastlyAddedOperation(); //last added to app
 
-    Q_INVOKABLE QString getDateFromOperation(const qint32 &index, const QString &place);
+    float getValueFromOperation(const qint32 &index, const QString &place);
 
-    Q_INVOKABLE qint32 getLastOperationIdx();
+    QString getCategoryFromOperation(const qint32 &index, const QString &place);
 
-    Q_INVOKABLE QString getLastOperationPlace();
+    QString getDateFromOperation(const qint32 &index, const QString &place);
 
-    Q_INVOKABLE int getIncomeSize();
+    int getIncomeSize();
 
-    QPair<qint32, QString> getLastOperationMeta();
+    int getExpenseSize();
+
+    int totalSize();
 
     friend QDataStream &operator>>(QDataStream &ds, Balance &bl);
 
     Balance(const Balance &other) = delete;
     Balance operator=(const Balance &other) = delete;
+
+    AppRegister *getAppRegister() const;
+
+signals:
+    void lastOperationChanged();
 
 
 private:
