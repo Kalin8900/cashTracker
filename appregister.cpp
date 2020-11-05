@@ -48,6 +48,12 @@ bool AppRegister::init()
 
     QFile file(AppRegister::appPath_);
 
+    if(!file.exists())
+    {
+        throw std::runtime_error("File: " + file.fileName().toStdString() + " does not exist.");
+        return false;
+    }
+
     if(!file.open(QIODevice::ReadOnly))
     {
         throw std::runtime_error("Couldn't open file to perform a AppRegister init " + file.fileName().toStdString());

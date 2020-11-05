@@ -70,7 +70,7 @@ border-radius: 100%</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>181</width>
+      <width>231</width>
       <height>721</height>
      </rect>
     </property>
@@ -82,7 +82,7 @@ border-radius: 100%</string>
       <rect>
        <x>-30</x>
        <y>80</y>
-       <width>181</width>
+       <width>241</width>
        <height>41</height>
       </rect>
      </property>
@@ -126,7 +126,7 @@ border-radius: 20%
       <rect>
        <x>-30</x>
        <y>130</y>
-       <width>181</width>
+       <width>241</width>
        <height>41</height>
       </rect>
      </property>
@@ -170,7 +170,7 @@ border-radius: 20%
       <rect>
        <x>-30</x>
        <y>180</y>
-       <width>181</width>
+       <width>241</width>
        <height>41</height>
       </rect>
      </property>
@@ -258,7 +258,7 @@ border-radius: 20%
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>181</width>
+       <width>231</width>
        <height>54</height>
       </rect>
      </property>
@@ -299,7 +299,7 @@ border: 0;
       <rect>
        <x>-30</x>
        <y>230</y>
-       <width>181</width>
+       <width>241</width>
        <height>41</height>
       </rect>
      </property>
@@ -329,7 +329,7 @@ border-radius: 20%
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/expense.png</normaloff>../build-cashTracker-Desktop_Qt_5_15_0_MinGW_64_bit-Debug/expense.png</iconset>
+       <normaloff>C:/Users/monli/Desktop/gearIcon.png</normaloff>C:/Users/monli/Desktop/gearIcon.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -342,8 +342,8 @@ border-radius: 20%
    <widget class="QStackedWidget" name="pages">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>0</y>
+      <x>270</x>
+      <y>30</y>
       <width>971</width>
       <height>721</height>
      </rect>
@@ -630,21 +630,205 @@ border-radius: 20%
      </widget>
     </widget>
     <widget class="QWidget" name="incomePage">
-     <widget class="QLabel" name="label_4">
+     <widget class="QListWidget" name="listWidget">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>290</y>
-        <width>47</width>
-        <height>13</height>
+        <x>65</x>
+        <y>130</y>
+        <width>701</width>
+        <height>261</height>
        </rect>
       </property>
+     </widget>
+     <widget class="QPushButton" name="hAddOperationBtn_2">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>410</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto Black</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+      </property>
       <property name="text">
-       <string>home</string>
+       <string>Add income</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>add.png</normaloff>add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hRemoveOperationBtn_2">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>470</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto Black</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Remove last</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>minus.png</normaloff>minus.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="expensePage"/>
+    <widget class="QWidget" name="expensePage">
+     <widget class="QPushButton" name="hAddOperationBtn_3">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>410</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto Black</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Add expense</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>add.png</normaloff>add.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="hRemoveOperationBtn_3">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>470</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto Black</family>
+        <pointsize>14</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:  #dadce1;
+color: #242526;
+border-radius: 20%
+
+
+
+
+</string>
+      </property>
+      <property name="text">
+       <string>Remove last</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>minus.png</normaloff>minus.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>24</width>
+        <height>24</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="listWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>65</x>
+        <y>130</y>
+        <width>701</width>
+        <height>261</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QLabel" name="date">
     <property name="geometry">
